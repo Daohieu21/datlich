@@ -1,0 +1,1 @@
+ C:\\code\\todo\\.\\.dart_tool\\flutter_gen\\gen_l10n\\app_localizations_en.dart C:\\code\\todo\\.\\.dart_tool\\flutter_gen\\gen_l10n\\app_localizations_vi.dart C:\\code\\todo\\.\\.dart_tool\\flutter_gen\\gen_l10n\\app_localizations.dart:  .\\l10n.yaml C:\\code\\todo\\.\\lib/l10n\\app_en.arb C:\\code\\todo\\.\\lib/l10n\\app_vi.arb

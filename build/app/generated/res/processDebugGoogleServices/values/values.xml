@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="firebase_database_url" translatable="false">https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">828642692640</string>
+    <string name="google_api_key" translatable="false">AIzaSyBVnOstsG--wNM2pRyNPTGq5RZ05lXLoGg</string>
+    <string name="google_app_id" translatable="false">1:828642692640:android:b27c5f62f31592cb97b645</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBVnOstsG--wNM2pRyNPTGq5RZ05lXLoGg</string>
+    <string name="google_storage_bucket" translatable="false">todo-5b469.appspot.com</string>
+    <string name="project_id" translatable="false">todo-5b469</string>
+</resources>

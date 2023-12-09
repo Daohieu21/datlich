@@ -1,0 +1,12 @@
+io.flutter.plugins.flutter_plugin_android_lifecycle-jetified-annotation-experimental-1.1.0-0 C:\Users\ADMIN\.gradle\caches\transforms-3\345f57e0af7e0d338d314db4c6893335\transformed\jetified-annotation-experimental-1.1.0\res
+io.flutter.plugins.flutter_plugin_android_lifecycle-jetified-window-java-1.0.0-beta04-1 C:\Users\ADMIN\.gradle\caches\transforms-3\4ccb83218baa0c80377365f57fdc3ecd\transformed\jetified-window-java-1.0.0-beta04\res
+io.flutter.plugins.flutter_plugin_android_lifecycle-core-1.6.0-2 C:\Users\ADMIN\.gradle\caches\transforms-3\6c721b44d00dbc4b3f2ad6bb927961c5\transformed\core-1.6.0\res
+io.flutter.plugins.flutter_plugin_android_lifecycle-jetified-window-1.0.0-beta04-3 C:\Users\ADMIN\.gradle\caches\transforms-3\f2d404fd6cd6e1d2a1eae3223d6cc2a2\transformed\jetified-window-1.0.0-beta04\res
+io.flutter.plugins.flutter_plugin_android_lifecycle-pngs-4 C:\code\datlich\build\flutter_plugin_android_lifecycle\generated\res\pngs\release
+io.flutter.plugins.flutter_plugin_android_lifecycle-resValues-5 C:\code\datlich\build\flutter_plugin_android_lifecycle\generated\res\resValues\release
+io.flutter.plugins.flutter_plugin_android_lifecycle-rs-6 C:\code\datlich\build\flutter_plugin_android_lifecycle\generated\res\rs\release
+io.flutter.plugins.flutter_plugin_android_lifecycle-mergeReleaseResources-7 C:\code\datlich\build\flutter_plugin_android_lifecycle\intermediates\incremental\release\mergeReleaseResources\merged.dir
+io.flutter.plugins.flutter_plugin_android_lifecycle-mergeReleaseResources-8 C:\code\datlich\build\flutter_plugin_android_lifecycle\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+io.flutter.plugins.flutter_plugin_android_lifecycle-merged_res-9 C:\code\datlich\build\flutter_plugin_android_lifecycle\intermediates\merged_res\release
+io.flutter.plugins.flutter_plugin_android_lifecycle-main-10 C:\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_plugin_android_lifecycle-2.0.15\android\src\main\res
+io.flutter.plugins.flutter_plugin_android_lifecycle-release-11 C:\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_plugin_android_lifecycle-2.0.15\android\src\release\res
