@@ -137,10 +137,10 @@ class _HomeState extends State<Home> {
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
               ),
             ),
-            Text(
-              loggedInUser.fullName ?? '',
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: Colors.black),
-            ),
+            // Text(
+            //   loggedInUser.fullName ?? '',
+            //   style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: Colors.black),
+            // ),
             const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
