@@ -1,3 +1,4 @@
+import 'package:f_quizz/appoint_screen.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsInfo extends StatefulWidget {
@@ -40,7 +41,11 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
                     Stack(
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => AppointScreen(),
+                              ));
+                          },
                           child: ClipRRect(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(15),

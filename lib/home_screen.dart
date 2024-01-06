@@ -1,3 +1,4 @@
+import 'package:f_quizz/doctor_info.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:f_quizz/resources/colors.dart';
@@ -189,6 +190,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+            const DoctorsInfo(),
           ]
         ),
       ),
