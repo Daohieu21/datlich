@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 15,),
                         const Text(
-                          "hi",
+                          "Hi,",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -99,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: const [
                               BoxShadow(
-                                color: Colors.white,
+                                color: Colors.grey,
                                 blurRadius: 6,
                                 spreadRadius: 3,
                               )
@@ -114,12 +114,13 @@ class HomeScreen extends StatelessWidget {
                               ),
                               prefixIcon: const Icon(
                                 Icons.search,
-                                size: 25,
+                                size: 30,
                               )
                             ),
                           ),
                         ),
-                      ]),
+                      ]
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
@@ -128,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
-                        color: Colors.blue.withOpacity(0.7),
+                        color: Colors.black.withOpacity(0.7),
                       ),
                     ),
                   ),
@@ -151,7 +152,7 @@ class HomeScreen extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.white,
+                                    color: Colors.grey,
                                     blurRadius: 4,
                                     spreadRadius: 2,
                                   )
@@ -167,7 +168,7 @@ class HomeScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.blue.withOpacity(0.7),
+                                color: Colors.black.withOpacity(0.7),
                               ),
                             ),
                           ],
@@ -183,14 +184,14 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
-                        color: Colors.blue.withOpacity(0.7),
+                        color: Colors.black.withOpacity(0.7),
                       ),
                     ),
                   ),
+                  const DoctorsInfo(),
                 ],
               ),
             ),
-            const DoctorsInfo(),
           ]
         ),
       ),

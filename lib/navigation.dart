@@ -1,4 +1,5 @@
 import 'package:f_quizz/home.dart';
+import 'package:f_quizz/home_screen.dart';
 import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/resources/colors.dart';
@@ -68,7 +69,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               create: (context) => TodoBloc(firebaseService: firebaseService),
               child: const TodoPage(),
             ),
-            const Home(),
+            HomeScreen(),
             const Setting(),
           ],
         ),

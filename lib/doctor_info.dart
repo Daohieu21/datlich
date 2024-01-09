@@ -1,5 +1,12 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_quizz/appoint_screen.dart';
+import 'package:f_quizz/models/firebase_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'models/todo_model.dart';
+import 'models/user_model.dart';
 
 class DoctorsInfo extends StatefulWidget {
   const DoctorsInfo({super.key});
@@ -9,6 +16,50 @@ class DoctorsInfo extends StatefulWidget {
 }
 
 class _DoctorsInfoState extends State<DoctorsInfo> {
+  late FirebaseService firebaseService; // Khai báo FirebaseService
+  List<TodoModel> todos = []; // Danh sách TodoModel
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel(
+    uid: '',
+    email: '',
+    fullName: '',
+    createAt: DateTime.now(),
+    modifiedAt: DateTime.now(),
+    avatarBase64: '', 
+    role: '',
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    firebaseService = FirebaseService(user?.uid ?? '');
+    // Lấy thông tin người dùng
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+    // Gọi hàm getTodos để lấy danh sách TodoModel
+    _loadTodos();
+  }
+
+  Future<void> _loadTodos() async {
+    try {
+      // Gọi phương thức getTodos từ FirebaseService
+      List<TodoModel> fetchedTodos = await firebaseService.getTodos();
+      // Cập nhật trạng thái với dữ liệu mới
+      setState(() {
+        todos = fetchedTodos;
+      });
+    } catch (error) {
+      // Xử lý lỗi nếu có
+      print('Error loading todos: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,8 +67,9 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 4,
+        itemCount: todos.length,
         itemBuilder: (context, index) {
+          TodoModel todo = todos[index];
           return Column(
             children: [
               Container(
@@ -29,7 +81,7 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: const [
                     BoxShadow(
-                      color: Colors.blue,
+                      color: Colors.grey,
                       blurRadius: 4,
                       spreadRadius: 2,
                     ),
@@ -43,7 +95,7 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
                         InkWell(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => AppointScreen(),
+                              builder: (context) => AppointScreen(doctorInfo: todo),
                               ));
                           },
                           child: ClipRRect(
@@ -51,13 +103,13 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
                               topLeft: Radius.circular(15),
                               topRight: Radius.circular(15),
                             ),
-                            child: Image.asset(
-                              'assets/images/profile.png',
+                            child: Image.memory(
+                              base64Decode(todo.imageBase64),
                               height: 200,
                               width: 200,
                               fit: BoxFit.cover,
-                              ),
                             ),
+                          ),
                         ),
                         Align(
                           alignment: Alignment.topRight,
@@ -70,7 +122,7 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.blue,
+                                  color: Colors.grey,
                                   blurRadius: 4,
                                   spreadRadius: 2,
                                 ),
@@ -93,17 +145,17 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Dr Abcd",
-                            style: TextStyle(
+                          Text(
+                            todo.title,
+                            style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w500,
                               color: Colors.blue,
                             ),
                           ),
-                          const Text(
-                            "Sugoii",
-                            style: TextStyle(
+                          Text(
+                            todo.content,
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w300,
                               color: Colors.black,
@@ -132,7 +184,8 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
               ),
             ],
           );
-        }),
+        }
+      ),
     );
   }
 }
