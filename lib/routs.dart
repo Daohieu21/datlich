@@ -44,9 +44,9 @@ Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (settings) {
             ));
   }
 
-  if (settings.name == Home.routeName) {
-    return MaterialPageRoute(builder: (_) => Home());
-  }
+  // if (settings.name == Home.routeName) {
+  //   return MaterialPageRoute(builder: (_) => Home());
+  // }
 
   if (settings.name == Setting.routeName) {
     return MaterialPageRoute(builder: (_) => Setting());

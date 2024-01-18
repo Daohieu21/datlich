@@ -64,21 +64,23 @@ class FirebaseService {
   Future<void> addTodo({
       required String title,
       required String content,
-      required String startTime,
-      required String endTime,
+      required String experience,
+      //required String startTime,
+      // required String endTime,
       required String imageBase64,
     }) async {
       try {
         UserModel? userInfo = await getUserInfo();
         if (userInfo != null && userInfo.role == 'admin') {
-          DateTime parsedDateTime = DateTime.parse(startTime);
-          DateTime parsedEndTime = DateTime.parse(endTime);
+          //DateTime parsedDateTime = DateTime.parse(startTime);
+          //DateTime parsedEndTime = DateTime.parse(endTime);
           // Tạo một đối tượng TodoModel mà không cần todoid ban đầu
           TodoModel todos = TodoModel(
             title: title,
             content: content,
-            startTime: parsedDateTime,
-            endTime: parsedEndTime,
+            experience: experience,
+            // startTime: parsedDateTime,
+            // endTime: parsedEndTime,
             isCompleted: false,
             imageBase64: imageBase64,
           );
@@ -116,8 +118,9 @@ class FirebaseService {
       required String imageBase64,
       required String title,
       required String content,
-      required DateTime startTime,
-      required DateTime endTime,
+      required String experience,
+      // required DateTime startTime,
+      // required DateTime endTime,
       bool isCompleted = false,
     }) async {
       try {
@@ -127,8 +130,9 @@ class FirebaseService {
             todoid: todoid,
             title: title,
             content: content,
-            startTime: startTime,
-            endTime: endTime,
+            experience: experience,
+            // startTime: startTime,
+            // endTime: endTime,
             isCompleted: isCompleted,
             imageBase64: imageBase64,
           );

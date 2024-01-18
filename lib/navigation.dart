@@ -1,4 +1,3 @@
-import 'package:f_quizz/home.dart';
 import 'package:f_quizz/home_screen.dart';
 import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';

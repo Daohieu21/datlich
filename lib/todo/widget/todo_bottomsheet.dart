@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/models/todo_model.dart';
-import 'package:f_quizz/resources/colors.dart';
 import 'package:f_quizz/resources/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,11 +35,8 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
     super.initState();
     if (widget.currentTodo != null) {
       titleController.text = widget.currentTodo?.title ?? '';
-      contentController.text = widget.currentTodo?.content ?? '';
-      selectTime =
-          TimeOfDay.fromDateTime(widget.currentTodo?.startTime ?? DateTime.now());
-      selectTimeEnd =
-          TimeOfDay.fromDateTime(widget.currentTodo?.endTime ?? DateTime.now());
+      selectedCategory = widget.currentTodo?.content ?? '';
+      experienceController.text = widget.currentTodo?.experience ?? '';
     }
   }
 
@@ -67,11 +62,16 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
-  DateTime dateTime = DateTime.now();
-  TimeOfDay selectTimeEnd = TimeOfDay.now();
-  TimeOfDay selectTime = TimeOfDay.now();
+  final TextEditingController experienceController = TextEditingController();
+  String selectedCategory = ''; // Thêm biến để lưu trữ danh mục được chọn
+  List<String> catNames = [
+    "Dental",
+    "Heart",
+    "Eye",
+    "Brain",
+    "Ear"
+  ];
 
-  ///biến show icon delete
   int choose = -1;
   @override
   Widget build(BuildContext context) {
@@ -135,8 +135,29 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: contentController,
+                      readOnly: true,
                       decoration: InputDecoration(
                         labelText: translation(context).content,
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(18.0),
+                          ),
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            showCategoryPicker(context);
+                          },
+                          child: const Icon(Icons.arrow_drop_down),
+                        ),
+                      ),
+                      validator: (value) => ValidatorUtils.todoValidate(context, value),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: experienceController,
+                      decoration: InputDecoration(
+                        labelText: translation(context).experience,
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(18.0),
@@ -145,76 +166,6 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                       ),
                       validator: (value) => ValidatorUtils.todoValidate(context, value),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: 16, right: 16, bottom: 16),
-                          width: 90,
-                          child: Text(translation(context).start),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            TimeOfDay? picked = await showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.now(),
-                            );
-                            if (picked != null) {
-                              setState(() {
-                                selectTime = picked;
-                              });
-                            }
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: AppColors.gray,
-                            ),
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              "${selectTime.hour}:${selectTime.minute}",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: 16, right: 16, bottom: 16),
-                          width: 90,
-                          child: Text(translation(context).end),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            TimeOfDay? picked = await showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.now(),
-                            );
-                            if (picked != null) {
-                              setState(() {
-                                selectTimeEnd = picked;
-                              });
-                            }
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: AppColors.gray,
-                            ),
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              "${selectTimeEnd.hour}:${selectTimeEnd.minute}",
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                     const SizedBox(height: 40),
                     Button(
@@ -225,19 +176,8 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                             final TodoModel editedTodo = TodoModel(
                               todoid: widget.currentTodo?.todoid ?? '',
                               title: titleController.text,
-                              content: contentController.text,
-                              startTime: DateTime(
-                                  dateTime.year,
-                                  dateTime.month,
-                                  dateTime.day,
-                                  selectTime.hour,
-                                  selectTime.minute),
-                              endTime: DateTime(
-                                  dateTime.year,
-                                  dateTime.month,
-                                  dateTime.day,
-                                  selectTimeEnd.hour,
-                                  selectTimeEnd.minute),
+                              content: selectedCategory,
+                              experience: experienceController.text,
                               // Thêm logic cập nhật ảnh khi pickedImage không null
                               imageBase64: pickedImage != null
                                   ? base64Encode(File(pickedImage!.path).readAsBytesSync())
@@ -247,20 +187,8 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                           } else {
                             final TodoModel newTodo = TodoModel(
                               title: titleController.text,
-                              content: contentController.text,
-                              startTime: DateTime(
-                                  dateTime.year,
-                                  dateTime.month,
-                                  dateTime.day,
-                                  selectTime.hour,
-                                  selectTime.minute),
-                              endTime: DateTime(
-                                  dateTime.year,
-                                  dateTime.month,
-                                  dateTime.day,
-                                  selectTimeEnd.hour,
-                                  selectTimeEnd.minute),
-                              // Thêm logic cập nhật ảnh khi pickedImage không null
+                              content: selectedCategory,
+                              experience: experienceController.text,
                               imageBase64: pickedImage != null
                                   ? base64Encode(File(pickedImage!.path).readAsBytesSync())
                                   : '',
@@ -287,5 +215,32 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
   }
   void onTapCancel() {
     Navigator.pop(context);
+  }
+  Future<void> showCategoryPicker(BuildContext context) async {
+    String? result = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Choose Category"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: catNames.map((category) {
+              return ListTile(
+                title: Text(category),
+                onTap: () {
+                  Navigator.pop(context, category);
+                },
+              );
+            }).toList(),
+          ),
+        );
+      },
+    );
+    if (result != null) {
+      setState(() {
+        selectedCategory = result;
+        contentController.text = selectedCategory;
+      });
+    }
   }
 }

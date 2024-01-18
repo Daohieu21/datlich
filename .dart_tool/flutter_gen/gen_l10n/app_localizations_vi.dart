@@ -126,4 +126,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get delete => 'Bạn có chắc chắn muốn xóa việc cần làm này ?';
+
+  @override
+  String get experience => 'Kinh nghiệm';
 }

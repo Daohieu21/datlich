@@ -126,4 +126,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get delete => 'Are you sure you want to delete this todo ?';
+
+  @override
+  String get experience => 'Experience';
 }

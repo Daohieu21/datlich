@@ -15,8 +15,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         await firebaseService.addTodo(
           title: event.newTodo.title,
           content: event.newTodo.content,
-          startTime: event.newTodo.startTime.toString(),
-          endTime: event.newTodo.endTime.toString(),
+          experience: event.newTodo.experience,
+          // startTime: event.newTodo.startTime.toString(),
+          // endTime: event.newTodo.endTime.toString(),
           imageBase64: event.newTodo.imageBase64,
         );
         // Lấy danh sách Todos sau khi thêm
@@ -56,8 +57,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           state.todoList[event.index].todoid!,
           title: event.editedTodo.title,
           content: event.editedTodo.content,
-          startTime: event.editedTodo.startTime,
-          endTime: event.editedTodo.endTime,
+          experience: event.editedTodo.experience,
+          // startTime: event.editedTodo.startTime,
+          // endTime: event.editedTodo.endTime,
           imageBase64: event.editedTodo.imageBase64,
 
         );
@@ -85,8 +87,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         updatedTodo.todoid!,
         title: updatedTodo.title,
         content: updatedTodo.content,
-        startTime: updatedTodo.startTime,
-        endTime: updatedTodo.endTime,
+        experience: updatedTodo.experience,
+        // startTime: updatedTodo.startTime,
+        // endTime: updatedTodo.endTime,
         isCompleted: updatedTodo.isCompleted,
         imageBase64: updatedTodo.imageBase64,
       );

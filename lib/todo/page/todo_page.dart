@@ -156,14 +156,35 @@ class _TodoPageState extends State<TodoPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                todoList[index].title,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Rubik',
-                                  fontSize: 25,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
+                              // Text(
+                              //   todoList[index].title,
+                              //   style: const TextStyle(
+                              //     color: Colors.black,
+                              //     fontFamily: 'Rubik',
+                              //     fontSize: 25,
+                              //     fontStyle: FontStyle.normal,
+                              //     fontWeight: FontWeight.w500,
+                              //   ),
+                              // ),
+                              RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    color: Colors.black,
+                                  ),
+                                  children: [
+                                    const TextSpan(
+                                      text: 'Name: ',
+                                      style: TextStyle(
+                                        color: Colors.black, // Chọn màu sắc phù hợp
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: todoList[index].title,
+                                    ),
+                                  ],
                                 ),
                               ),
                               const SizedBox(height: 8),
@@ -179,11 +200,11 @@ class _TodoPageState extends State<TodoPage> {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                '${DateFormat.jm().format(todoList[index].startTime)} - ${DateFormat.jm().format(todoList[index].endTime)}',
+                                todoList[index].experience,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontFamily: 'Rubik',
-                                  fontSize: 10,
+                                  fontSize: 20,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500,
                                 ),

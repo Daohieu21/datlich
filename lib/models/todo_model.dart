@@ -5,8 +5,9 @@ class TodoModel{
   String imageBase64;
   String title;
   String content;
-  DateTime startTime;
-  DateTime endTime;
+  String experience;
+  // DateTime startTime;
+  // DateTime endTime;
   bool isCompleted;
 
   TodoModel({
@@ -14,8 +15,9 @@ class TodoModel{
     required this.imageBase64,
     required this.title, 
     required this.content,
-    required this.startTime,
-    required this.endTime,
+    required this.experience,
+    // required this.startTime,
+    // required this.endTime,
     this.isCompleted = false,
     });
 
@@ -24,8 +26,9 @@ class TodoModel{
     String? imageBase64,
     String? title,
     String? content,
-    DateTime? startTime,
-    DateTime? endTime,
+    String? experience,
+    // DateTime? startTime,
+    // DateTime? endTime,
     bool? isCompleted,
   }) {
     return TodoModel(
@@ -33,8 +36,9 @@ class TodoModel{
       imageBase64: imageBase64 ?? this.imageBase64,
       title: title ?? this.title,
       content: content ?? this.content,
-      startTime: startTime ?? this.startTime,
-      endTime: endTime ?? this.endTime,
+      experience: experience ?? this.experience,
+      // startTime: startTime ?? this.startTime,
+      // endTime: endTime ?? this.endTime,
       isCompleted: isCompleted ?? this.isCompleted,
     );
   }
@@ -46,8 +50,9 @@ class TodoModel{
       'imageBase64': imageBase64,
       'title': title,
       'content': content,
-      'startTime': startTime.toIso8601String(),
-      'endTime': endTime.toIso8601String(),
+      'experience': experience,
+      // 'startTime': startTime.toIso8601String(),
+      // 'endTime': endTime.toIso8601String(),
       'isCompleted': isCompleted,
     };
   }
@@ -62,8 +67,9 @@ class TodoModel{
       imageBase64: map['imageBase64'],
       title: map['title'] as String, 
       content: map['content'] as String,
-      startTime: DateTime.parse(map['startTime']),
-      endTime: DateTime.parse(map['endTime']),
+      experience: map['experience'] as String,
+      // startTime: DateTime.parse(map['startTime']),
+      // endTime: DateTime.parse(map['endTime']),
       isCompleted: map['isCompleted'],
     );
   }

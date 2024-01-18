@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
+import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/resources/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -42,11 +42,7 @@ class _AppointScreenState extends State<AppointScreen> {
                 image: DecorationImage(
                   image: base64ToImage(doctorInfo.imageBase64) ?? const AssetImage("assets/images/profile.png"),
                   fit: BoxFit.cover,
-                  ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ) 
+                ),
               ),
               child: Container(
                 decoration: BoxDecoration(
@@ -69,30 +65,6 @@ class _AppointScreenState extends State<AppointScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          // InkWell(
-                          //   onTap: () {},
-                          //   child: 
-                          //   Container(
-                          //     margin: const EdgeInsets.all(8),
-                          //     height: 45,
-                          //     width: 45,
-                          //     decoration: BoxDecoration(
-                          //       color: const Color(0xFFF2F8FF),
-                          //       borderRadius: BorderRadius.circular(10),
-                          //       boxShadow: const [
-                          //         BoxShadow(
-                          //           color: Colors.grey,
-                          //           blurRadius: 4,
-                          //           spreadRadius: 2,
-                          //         ),
-                          //       ]
-                          //     ),
-                          //     child: const Center(
-                          //       child: Icon(Icons.arrow_back,
-                          //       color: Colors.blue,size: 28),
-                          //     ),
-                          //   ),
-                          // ),
                           Container(
                             margin: const EdgeInsets.all(8),
                             height: 45,
@@ -147,22 +119,34 @@ class _AppointScreenState extends State<AppointScreen> {
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Text(
-                                "Experience",
-                                style: TextStyle(
+                                translation(context).experience,
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(height: 8,),
-                              Text(
-                                "10 years",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
+                              const SizedBox(height: 8,),
+                              RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: doctorInfo.experience,
+                                    ),
+                                    const TextSpan(
+                                      text: ' years',
+                                      style: TextStyle(
+                                        color: Colors.white, // Chọn màu sắc phù hợp
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

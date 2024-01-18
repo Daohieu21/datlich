@@ -39,5 +39,6 @@
     "successfully_created": "Successfully created account",
     "please_enter": "Please enter search keywords",
     "enter": "Enter keywords ...",
-    "delete": "Are you sure you want to delete this todo ?"
+    "delete": "Are you sure you want to delete this todo ?",
+    "experience": "Experience"
 }
