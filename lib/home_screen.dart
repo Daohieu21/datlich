@@ -1,11 +1,32 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_quizz/doctor_info.dart';
+import 'package:f_quizz/models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:f_quizz/resources/colors.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel(
+    uid: '',
+    email: '',
+    fullName: '',
+    createAt: DateTime.now(),
+    modifiedAt: DateTime.now(),
+    avatarBase64: '', 
+    role: '',
+  );
+  
   List catNames = [
     "Dental",
     "Heart",
@@ -22,6 +43,19 @@ class HomeScreen extends StatelessWidget {
     Icon(MdiIcons.earHearing, color: Colors.blue, size: 30),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -53,32 +87,39 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: AssetImage('assets/images/profile.png'),
-                            ),
-                            Icon(
+                          children: [
+                            if (loggedInUser.avatarBase64 != null && loggedInUser.avatarBase64!.isNotEmpty)
+                              CircleAvatar(
+                                radius: 30,
+                                backgroundImage: MemoryImage(base64Decode(loggedInUser.avatarBase64!)),
+                              )
+                            else
+                              const CircleAvatar(
+                                radius: 30,
+                                backgroundImage: AssetImage('assets/images/profile.png'),
+                              ),
+                            const Icon(
                               Icons.notifications_outlined,
-                                color: Colors.white,
-                                size: 30,
+                              color: Colors.white,
+                              size: 30,
                             ),
                           ],
                         ),
                         const SizedBox(height: 15,),
-                        const Text(
-                          "Hi,",
-                          style: TextStyle(
+                        Text(
+                          "Hi, ${loggedInUser.fullName}",
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            ),
+                          ),
                         ),
                         const SizedBox(height: 10,),
                         const Text(
@@ -92,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(top: 15, bottom: 20),
                           width: MediaQuery.of(context).size.width,
-                          height: 55,
+                          height: 50,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -181,6 +222,19 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 15),
                     child: Text(
                       "Recommended Doctors",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black.withOpacity(0.7),
+                      ),
+                    ),
+                  ),
+                  const DoctorsInfo(),
+                  const SizedBox(height: 10,), 
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      "Top Doctors",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,

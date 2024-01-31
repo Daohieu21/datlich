@@ -1,3 +1,4 @@
+import 'package:f_quizz/intro.dart';
 import 'package:f_quizz/login/bloc/login_bloc.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/routs.dart';

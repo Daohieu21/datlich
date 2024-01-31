@@ -20,18 +20,18 @@ class _IntroState extends State<Intro> {
   List<IntroContent> contents = [
     IntroContent(
       image: Assets.images.intro1.path,
-      title: 'Boost Productivity',
-      description: 'Stay organized and boost your productivity with our\npowerful Todo app.',
+      title: 'Learn About Your Doctors',
+      description: 'Discover your doctors: qualifications, expertise, and patient reviews, empowering you to make informed decisions about your healthcare journey.',
     ),
     IntroContent(
       image: Assets.images.intro2.path,
-      title: 'Discover Endless Possibilities',
-      description: 'Explore the endless possibilities of our Todo app,\nmaking task management a breeze.',
+      title: 'Effortless Appointment Booking',
+      description: 'Revolutionize Your Medical Visits: Explore the Convenience of Booking Appointments Anytime, Anywhere',
     ),
     IntroContent(
       image: Assets.images.intro3.path,
-      title: 'Efficient Task Management',
-      description: 'Get things done efficiently with our feature-rich Todo app,\ndesigned to simplify your task management.',
+      title: 'Friendly interface',
+      description: 'Experience a user-friendly interface that simplifies the process of booking appointments, ensuring a seamless and enjoyable healthcare management journey.',
     ),
   ];
 
@@ -62,6 +62,7 @@ class _IntroState extends State<Intro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(

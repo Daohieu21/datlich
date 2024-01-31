@@ -34,20 +34,21 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Assets.images.picture3.image(
-              height: 150,
-              width: 150
+              height: 300,
+              width: 300
             ),
             const SizedBox(
               height: 20,
             ),
             const Text(
-              "TODO APP",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
+              "Appointment Online",
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
             ),
           ],
         ),

@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/resources/colors.dart';
+import 'package:f_quizz/ui_components/btn/button.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import 'models/todo_model.dart';
+import 'package:intl/intl.dart';
 
 class AppointScreen extends StatefulWidget {
   final TodoModel doctorInfo;
@@ -16,6 +16,19 @@ class AppointScreen extends StatefulWidget {
 }
 
 class _AppointScreenState extends State<AppointScreen> {
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = const TimeOfDay(hour: 7, minute: 0);
+  List<TimeOfDay> availableTimes = [
+    const TimeOfDay(hour: 7, minute: 0),
+    const TimeOfDay(hour: 8, minute: 0),
+    const TimeOfDay(hour: 9, minute: 0),
+    const TimeOfDay(hour: 10, minute: 0),
+    const TimeOfDay(hour: 11, minute: 0),
+    const TimeOfDay(hour: 14, minute: 0),
+    const TimeOfDay(hour: 15, minute: 0),
+    const TimeOfDay(hour: 16, minute: 0),
+  ];
+
   ImageProvider<Object>? base64ToImage(String base64String) {
     try {
       Uint8List bytes = const Base64Decoder().convert(base64String);
@@ -25,15 +38,32 @@ class _AppointScreenState extends State<AppointScreen> {
       return null;
     }
   }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
   
   @override
   Widget build(BuildContext context) {
     TodoModel doctorInfo = widget.doctorInfo;
+     double buttonWidth = (MediaQuery.of(context).size.width - 40) / 4;
     print("Doctor Info: $doctorInfo");
     return Material(
       color: const Color(0xFFD9E4EE),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
@@ -70,7 +100,7 @@ class _AppointScreenState extends State<AppointScreen> {
                             height: 45,
                             width: 45,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF2F8FF),
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
@@ -143,7 +173,7 @@ class _AppointScreenState extends State<AppointScreen> {
                                     const TextSpan(
                                       text: ' years',
                                       style: TextStyle(
-                                        color: Colors.white, // Chọn màu sắc phù hợp
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ],
@@ -182,7 +212,7 @@ class _AppointScreenState extends State<AppointScreen> {
             ),
             const SizedBox(height: 10,),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -193,20 +223,6 @@ class _AppointScreenState extends State<AppointScreen> {
                       fontWeight: FontWeight.w500,
                       color: Colors.blue,
                     ),
-                  ),
-                  const SizedBox(height: 5,),
-                  Row(
-                    children: [
-                      Icon(MdiIcons.heartPulse, color: Colors.red, size: 28,),
-                      const SizedBox(height: 5,),
-                      Text(
-                        "Surgeon",
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                    ],
                   ),
                   const SizedBox(height: 15,),
                   Text(
@@ -220,48 +236,83 @@ class _AppointScreenState extends State<AppointScreen> {
                   ),
                   const SizedBox(height: 15,),
                   Text(
-                    "Book Date",
+                    "Select Hours",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.black.withOpacity(0.6),
                     ),
                   ),
-                  const SizedBox(height: 15,),
-                  Container(
-                    height: 70,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: index == 1 ? Colors.white : Colors.blue,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 4,
-                                    spreadRadius: 2,
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  
-                                ],
+                  Wrap(
+                    children: availableTimes.map((TimeOfDay value) {
+                      return SizedBox(
+                        width: buttonWidth,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedTime = value;
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            margin: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: selectedTime == value ? Colors.blue : Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              value.format(context),
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
                               ),
                             ),
-                          ],
-                        );
-                      }
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 15,),
+                  Text(
+                    "Select Date",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black.withOpacity(0.6),
                     ),
+                  ),
+                  InkWell(
+                    onTap: () => _selectDate(context),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            DateFormat('dd-MM-yyyy').format(selectedDate),
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Icon(Icons.calendar_today),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30,),
+                  Button(
+                    textButton: "Book Appointment",
+                    onTap: () {
+                      
+                    },
                   ),
                 ],
               ),

@@ -132,7 +132,7 @@ class _TodoPageState extends State<TodoPage> {
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.blue,
+                            color: Colors.grey,
                           ),
                           borderRadius: BorderRadius.circular(0),
                         ),
@@ -140,8 +140,8 @@ class _TodoPageState extends State<TodoPage> {
                           child: Image.memory(
                             base64Decode(todoList[index].imageBase64),
                             fit: BoxFit.cover,
-                            width: 100,
-                            height: 100,
+                            width: 90,
+                            height: 90,
                           )
                         ),
                       ),
@@ -149,28 +149,18 @@ class _TodoPageState extends State<TodoPage> {
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            //color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                          // decoration: const BoxDecoration(
+                          //   color: Colors.red,
+                          //   borderRadius: BorderRadius.circular(20),
+                          // ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Text(
-                              //   todoList[index].title,
-                              //   style: const TextStyle(
-                              //     color: Colors.black,
-                              //     fontFamily: 'Rubik',
-                              //     fontSize: 25,
-                              //     fontStyle: FontStyle.normal,
-                              //     fontWeight: FontWeight.w500,
-                              //   ),
-                              // ),
                               RichText(
                                 text: TextSpan(
                                   style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    //fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
                                     color: Colors.black,
                                   ),
@@ -178,7 +168,7 @@ class _TodoPageState extends State<TodoPage> {
                                     const TextSpan(
                                       text: 'Name: ',
                                       style: TextStyle(
-                                        color: Colors.black, // Chọn màu sắc phù hợp
+                                        color: Colors.black,
                                       ),
                                     ),
                                     TextSpan(
@@ -188,25 +178,53 @@ class _TodoPageState extends State<TodoPage> {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              Text(
-                                todoList[index].content,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Rubik',
-                                  fontSize: 20,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
+                              RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    //fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    color: Colors.black,
+                                  ),
+                                  children: [
+                                    const TextSpan(
+                                      text: 'Specialist: ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: todoList[index].content,
+                                    ),
+                                  ],
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              Text(
-                                todoList[index].experience,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Rubik',
-                                  fontSize: 20,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
+                              RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    //fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    color: Colors.black,
+                                  ),
+                                  children: [
+                                    const TextSpan(
+                                      text: 'Experience: ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: todoList[index].experience,
+                                    ),
+                                    const TextSpan(
+                                      text: ' years',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

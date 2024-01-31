@@ -13,7 +13,7 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         style: ButtonStyle(
@@ -23,10 +23,10 @@ class Button extends StatelessWidget {
           )),
           backgroundColor: MaterialStateProperty.all(Colors.blue),
           padding: MaterialStateProperty.all(
-              EdgeInsets.symmetric(vertical: 16, horizontal: 32)),
+              const EdgeInsets.symmetric(vertical: 16, horizontal: 32)),
         ),
         onPressed: onTap,
-        child: Text(textButton, style: TextStyle(
+        child: Text(textButton, style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'Rubik',
                       fontSize: 16,
