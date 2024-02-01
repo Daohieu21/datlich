@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/resources/colors.dart';
 import 'package:f_quizz/ui_components/btn/button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'models/todo_model.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +18,7 @@ class AppointScreen extends StatefulWidget {
 }
 
 class _AppointScreenState extends State<AppointScreen> {
+  late FirebaseService firebaseService;
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = const TimeOfDay(hour: 7, minute: 0);
   List<TimeOfDay> availableTimes = [
@@ -48,16 +51,24 @@ class _AppointScreenState extends State<AppointScreen> {
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
-        selectedDate = picked;
+        selectedDate = DateTime(picked.year, picked.month, picked.day, selectedTime.hour, selectedTime.minute);
       });
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    // Lấy người dùng hiện tại từ Firebase Authentication
+    User? user = FirebaseAuth.instance.currentUser;
+    print('User: $user');
+    firebaseService = FirebaseService(user?.uid ?? '');
+  }
   
   @override
   Widget build(BuildContext context) {
     TodoModel doctorInfo = widget.doctorInfo;
-     double buttonWidth = (MediaQuery.of(context).size.width - 40) / 4;
+    double buttonWidth = (MediaQuery.of(context).size.width - 40) / 4;
     print("Doctor Info: $doctorInfo");
     return Material(
       color: const Color(0xFFD9E4EE),
@@ -310,8 +321,27 @@ class _AppointScreenState extends State<AppointScreen> {
                   const SizedBox(height: 30,),
                   Button(
                     textButton: "Book Appointment",
-                    onTap: () {
-                      
+                    onTap: () async {
+                      try {
+                        // Lấy thông tin từ doctorInfo
+                        String title = doctorInfo.title;
+                        String content = doctorInfo.content;
+                        // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
+                        DateTime selectedDateTime = DateTime(
+                          selectedDate.year, selectedDate.month, selectedDate.day,
+                          selectedTime.hour, selectedTime.minute);
+                        // Gọi đến addAppoint để thêm dữ liệu lên Firebase
+                        await firebaseService.addAppoint(
+                          title: title,
+                          content: content,
+                          time: selectedDateTime.toIso8601String(),
+                        );
+                        // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
+                        print('Appointment added successfully!');
+                      } catch (error) {
+                        // Xử lý lỗi nếu có
+                        print('Error adding appointment: $error');
+                      }
                     },
                   ),
                 ],

@@ -6,8 +6,6 @@ class TodoModel{
   String title;
   String content;
   String experience;
-  // DateTime startTime;
-  // DateTime endTime;
   bool isCompleted;
 
   TodoModel({
@@ -16,8 +14,6 @@ class TodoModel{
     required this.title, 
     required this.content,
     required this.experience,
-    // required this.startTime,
-    // required this.endTime,
     this.isCompleted = false,
     });
 
@@ -27,8 +23,6 @@ class TodoModel{
     String? title,
     String? content,
     String? experience,
-    // DateTime? startTime,
-    // DateTime? endTime,
     bool? isCompleted,
   }) {
     return TodoModel(
@@ -37,8 +31,6 @@ class TodoModel{
       title: title ?? this.title,
       content: content ?? this.content,
       experience: experience ?? this.experience,
-      // startTime: startTime ?? this.startTime,
-      // endTime: endTime ?? this.endTime,
       isCompleted: isCompleted ?? this.isCompleted,
     );
   }
@@ -51,8 +43,6 @@ class TodoModel{
       'title': title,
       'content': content,
       'experience': experience,
-      // 'startTime': startTime.toIso8601String(),
-      // 'endTime': endTime.toIso8601String(),
       'isCompleted': isCompleted,
     };
   }
@@ -68,8 +58,6 @@ class TodoModel{
       title: map['title'] as String, 
       content: map['content'] as String,
       experience: map['experience'] as String,
-      // startTime: DateTime.parse(map['startTime']),
-      // endTime: DateTime.parse(map['endTime']),
       isCompleted: map['isCompleted'],
     );
   }

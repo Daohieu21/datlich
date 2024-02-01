@@ -2,6 +2,7 @@ import 'package:f_quizz/home_screen.dart';
 import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/resources/colors.dart';
+import 'package:f_quizz/schedule_screen.dart';
 import 'package:f_quizz/setting/page/setting.dart';
 import 'package:f_quizz/todo/bloc/todo_bloc.dart';
 import 'package:f_quizz/todo/page/todo_page.dart';
@@ -68,7 +69,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               create: (context) => TodoBloc(firebaseService: firebaseService),
               child: const TodoPage(),
             ),
-            HomeScreen(),
+            const HomeScreen(),
+            ScheduleScreen(),
             const Setting(),
           ],
         ),
@@ -102,6 +104,13 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                   child: const Icon(Icons.house),
                 ),
                 label: translation(context).home,
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: const Icon(Icons.calendar_month_outlined),
+                ),
+                label: 'Schedule',
               ),
               BottomNavigationBarItem(
                 icon: Container(

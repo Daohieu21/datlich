@@ -1,7 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:f_quizz/models/appoint_model.dart';
 import 'package:f_quizz/models/todo_model.dart';
 import 'package:f_quizz/models/user_model.dart';
 
@@ -61,26 +60,91 @@ class FirebaseService {
     }
   }
 
+  Future<List<AppointModel>> getAppoint() async {
+    try {
+      Response response = await dio.get(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid.json',
+      );
+
+      if (response.statusCode == 200) {
+        // Kiểm tra xem response.data có null không
+        if (response.data != null) {
+          final Map<String, dynamic> rawData = response.data;
+          // Chuyển đổi dữ liệu thành danh sách TodoModel
+          final appoint = rawData.entries
+            .where((entry) => entry.value != null)
+            .map((entry) => AppointModel.fromMap(entry.value))
+            .toList();
+
+          return appoint;
+        } else {
+          print('Response data is null');
+          return [];
+        }
+      } else {
+        print('Failed to load todos: ${response.statusCode}');
+        return [];
+      }
+    } catch (error) {
+      print('Error getting todos: $error');
+      throw error;
+    }
+  }
+
+  Future<void> addAppoint({
+    required String title,
+    required String content,
+    required String time,
+  }) async {
+    try {
+      DateTime parsedDateTime = DateTime.parse(time);
+      // Tạo một đối tượng AppointModel mà không cần aid ban đầu
+      AppointModel appoint = AppointModel(
+        title: title,
+        content: content,
+        time: parsedDateTime,
+        isCompleted: false,
+      );
+
+      Response response = await dio.post(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid.json',
+        data: appoint.toMap(),
+      );
+
+      if (response.statusCode == 200) {
+        String newAppointId = response.data['name'];
+        print('newAppointId: $newAppointId');
+        appoint.aid = newAppointId;
+
+        await dio.put(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid/$newAppointId.json',
+        data: appoint.toMap(),
+        );
+
+        print('Appoint added successfully! Appoint ID: $newAppointId');
+      } else {
+        print('Failed to add appoint: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error adding appoint: $error');
+      throw error;
+    }
+  }
+
   Future<void> addTodo({
       required String title,
       required String content,
       required String experience,
-      //required String startTime,
-      // required String endTime,
       required String imageBase64,
     }) async {
       try {
         UserModel? userInfo = await getUserInfo();
         if (userInfo != null && userInfo.role == 'admin') {
-          //DateTime parsedDateTime = DateTime.parse(startTime);
-          //DateTime parsedEndTime = DateTime.parse(endTime);
           // Tạo một đối tượng TodoModel mà không cần todoid ban đầu
           TodoModel todos = TodoModel(
             title: title,
             content: content,
             experience: experience,
-            // startTime: parsedDateTime,
-            // endTime: parsedEndTime,
             isCompleted: false,
             imageBase64: imageBase64,
           );
@@ -119,8 +183,6 @@ class FirebaseService {
       required String title,
       required String content,
       required String experience,
-      // required DateTime startTime,
-      // required DateTime endTime,
       bool isCompleted = false,
     }) async {
       try {
@@ -131,8 +193,6 @@ class FirebaseService {
             title: title,
             content: content,
             experience: experience,
-            // startTime: startTime,
-            // endTime: endTime,
             isCompleted: isCompleted,
             imageBase64: imageBase64,
           );
