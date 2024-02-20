@@ -1,4 +1,5 @@
 import 'package:f_quizz/home_screen.dart';
+import 'package:f_quizz/manage_screen.dart';
 import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/resources/colors.dart';
@@ -69,8 +70,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               create: (context) => TodoBloc(firebaseService: firebaseService),
               child: const TodoPage(),
             ),
+            const ManageScreen(),
             const HomeScreen(),
-            ScheduleScreen(),
+            const ScheduleScreen(),
             const Setting(),
           ],
         ),
@@ -97,6 +99,13 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                   child: const Icon(Icons.check_box),
                 ),
                 label: translation(context).todo,
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: const Icon(Icons.manage_history),
+                ),
+                label: 'Manage',
               ),
               BottomNavigationBarItem(
                 icon: Container(

@@ -18,7 +18,8 @@ class AppointScreen extends StatefulWidget {
 }
 
 class _AppointScreenState extends State<AppointScreen> {
-  late FirebaseService firebaseService;
+  late FirebaseService firebaseService; // Khai báo FirebaseService
+
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = const TimeOfDay(hour: 7, minute: 0);
   List<TimeOfDay> availableTimes = [

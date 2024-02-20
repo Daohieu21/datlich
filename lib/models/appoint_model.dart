@@ -52,7 +52,7 @@ class AppointModel{
       title: map['title'] as String, 
       content: map['content'] as String,
       time: DateTime.parse(map['time']),
-      isCompleted: map['isCompleted'],
+      isCompleted: map['isCompleted'] as bool? ?? false,
     );
   }
   factory AppointModel.fromJson(String source) =>

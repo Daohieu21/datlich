@@ -43,10 +43,10 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
       setState(() {});
     });
     // Gọi hàm getTodos để lấy danh sách TodoModel
-    _loadTodos();
+    loadTodos();
   }
 
-  Future<void> _loadTodos() async {
+  Future<void> loadTodos() async {
     try {
       // Gọi phương thức getTodos từ FirebaseService
       List<TodoModel> fetchedTodos = await firebaseService.getTodos();
@@ -58,6 +58,11 @@ class _DoctorsInfoState extends State<DoctorsInfo> {
       // Xử lý lỗi nếu có
       print('Error loading todos: $error');
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

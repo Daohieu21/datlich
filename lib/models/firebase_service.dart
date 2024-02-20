@@ -91,45 +91,92 @@ class FirebaseService {
     }
   }
 
-  Future<void> addAppoint({
-    required String title,
-    required String content,
-    required String time,
-  }) async {
+  Future<List<AppointModel>> getAppointAdmin() async {
     try {
-      DateTime parsedDateTime = DateTime.parse(time);
-      // Tạo một đối tượng AppointModel mà không cần aid ban đầu
-      AppointModel appoint = AppointModel(
-        title: title,
-        content: content,
-        time: parsedDateTime,
-        isCompleted: false,
-      );
-
-      Response response = await dio.post(
-        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid.json',
-        data: appoint.toMap(),
+      Response response = await dio.get(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appointadmin.json',
       );
 
       if (response.statusCode == 200) {
-        String newAppointId = response.data['name'];
-        print('newAppointId: $newAppointId');
-        appoint.aid = newAppointId;
+        // Kiểm tra xem response.data có null không
+        if (response.data != null) {
+          final Map<String, dynamic> rawData = response.data;
+          // Chuyển đổi dữ liệu thành danh sách TodoModel
+          final appoint = rawData.entries
+            .where((entry) => entry.value != null)
+            .map((entry) => AppointModel.fromMap(entry.value))
+            .toList();
 
-        await dio.put(
-        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid/$newAppointId.json',
-        data: appoint.toMap(),
-        );
-
-        print('Appoint added successfully! Appoint ID: $newAppointId');
+          return appoint;
+        } else {
+          print('Response data is null');
+          return [];
+        }
       } else {
-        print('Failed to add appoint: ${response.statusCode}');
+        print('Failed to load todos: ${response.statusCode}');
+        return [];
       }
     } catch (error) {
-      print('Error adding appoint: $error');
+      print('Error getting todos: $error');
       throw error;
     }
   }
+
+Future<void> addAppoint({
+  required String title,
+  required String content,
+  required String time,
+}) async {
+  try {
+    DateTime parsedDateTime = DateTime.parse(time);
+    
+    // Tạo một đối tượng AppointModel mà không cần aid ban đầu
+    AppointModel appoint = AppointModel(
+      title: title,
+      content: content,
+      time: parsedDateTime,
+      isCompleted: false,
+    );
+    
+
+    // Thêm vào 'appoint'
+    Response responseAppoint = await dio.post(
+      'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid.json',
+      data: appoint.toMap(),
+    );
+
+    if (responseAppoint.statusCode == 200) {
+      String newAppointId = responseAppoint.data['name'];
+      print('newAppointId (appoint): $newAppointId');
+      appoint.aid = newAppointId;
+
+      // Cập nhật vào 'appoint'
+      await dio.put(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid/$newAppointId.json',
+        data: appoint.toMap(),
+      );
+
+      // Thêm vào 'appointadmin' với cùng một ID
+      Response responseAppointAdmin = await dio.put(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appointadmin/$newAppointId.json',
+        data: appoint.toMap(),
+      );
+
+      if (responseAppointAdmin.statusCode == 200) {
+        print('Appoint added successfully! Appoint ID (appointadmin): $newAppointId');
+      } else {
+        print('Failed to add appoint (appointadmin): ${responseAppointAdmin.statusCode}');
+      }
+
+      print('Appoint added successfully! Appoint ID (appoint): $newAppointId');
+    } else {
+      print('Failed to add appoint (appoint): ${responseAppoint.statusCode}');
+    }
+  } catch (error) {
+    print('Error adding appoint: $error');
+    throw error;
+  }
+}
 
   Future<void> addTodo({
       required String title,
@@ -217,6 +264,65 @@ class FirebaseService {
       }
     }
 
+  Future<void> updateAppoint(String aid, {
+    String? title,
+    String? content,
+    DateTime? time,
+    bool isCompleted = false,
+  }) async {
+    try {
+      UserModel? userInfo = await getUserInfo();
+      if (userInfo != null && userInfo.role == 'admin') {
+
+        // Lấy dữ liệu hiện tại từ server (nếu cần)
+        Response currentDataResponse = await dio.get(
+          'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appointadmin/$aid.json',
+        );
+
+        // Chuyển dữ liệu từ server thành đối tượng AppointModel
+        AppointModel? currentAppoint = AppointModel.fromMap(currentDataResponse.data);
+
+        if (currentAppoint != null) {
+          // Sử dụng phương thức copyWith để tạo một bản sao với các thay đổi
+          AppointModel updatedAppoint = currentAppoint.copyWith(
+            aid: aid,
+            title: title,
+            content: content,
+            time: time,
+            isCompleted: isCompleted,
+          );
+
+          // Gửi dữ liệu đã cập nhật lên server
+          Response response = await dio.put(
+            'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appointadmin/$aid.json',
+            data: updatedAppoint.toMap(),
+          );
+
+          // Gửi dữ liệu đã cập nhật lên server
+          Response responsedata = await dio.put(
+            'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid/$aid.json',
+            data: updatedAppoint.toMap(),
+          );
+
+          if (response.statusCode == 200 && responsedata.statusCode == 200 ) {
+            print('Appoint updated successfully! Appoint ID: $aid');
+          } else {
+            print('Failed to update appoint: ${response.statusCode}');
+          }
+        } else {
+          print('Failed to retrieve current appoint data.');
+          // Xử lý thông báo hoặc các hành động khác nếu không thể lấy dữ liệu hiện tại
+        }
+      } else {
+        print('Permission denied. User does not have admin role.');
+        // Xử lý thông báo hoặc các hành động khác khi không có quyền
+      }
+    } catch (error) {
+      print('Error updating appoint: $error');
+      throw error;
+    }
+  }
+
   Future<void> deleteTodo(String todoid) async {
     try {
       UserModel? userInfo = await getUserInfo();
@@ -239,4 +345,34 @@ class FirebaseService {
       throw error;
     }
   }
+
+  Future<void> deleteAppoint(String aid) async {
+    try {
+      // Xóa ở 'appoint'
+      Response responseAppoint = await dio.delete(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appoint/$uid/$aid.json',
+      );
+
+      if (responseAppoint.statusCode == 200) {
+        print('Appoint deleted successfully (appoint)!');
+      } else {
+        print('Failed to delete appoint (appoint): ${responseAppoint.statusCode}');
+      }
+
+      // Xóa ở 'appointadmin'
+      Response responseAppointAdmin = await dio.delete(
+        'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appointadmin/$aid.json',
+      );
+
+      if (responseAppointAdmin.statusCode == 200) {
+        print('Appoint deleted successfully (appointadmin)!');
+      } else {
+        print('Failed to delete appoint (appointadmin): ${responseAppointAdmin.statusCode}');
+      }
+    } catch (error) {
+      print('Error deleting appoint: $error');
+      throw error;
+    }
+  }
+
 }

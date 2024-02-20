@@ -6,6 +6,7 @@ import 'package:f_quizz/resources/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../ui_components/btn/button.dart';
+import 'package:flutter/services.dart';
 
 class TodoBottomSheet extends StatefulWidget {
   const TodoBottomSheet({
@@ -106,7 +107,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                               ) 
                         : widget.currentTodo?.imageBase64 != null
                             ? Image.memory(
-                                base64Decode(widget.currentTodo!.imageBase64!),
+                                base64Decode(widget.currentTodo!.imageBase64),
                                 width: 150,
                                 height: 150,
                                 fit: BoxFit.cover,
@@ -170,7 +171,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                     const SizedBox(height: 40),
                     Button(
                       textButton: translation(context).save,
-                      onTap: () {
+                      onTap: () async {
                         if (formKey.currentState!.validate()) {
                           if (widget.currentTodo != null) {
                             final TodoModel editedTodo = TodoModel(
@@ -191,7 +192,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                               experience: experienceController.text,
                               imageBase64: pickedImage != null
                                   ? base64Encode(File(pickedImage!.path).readAsBytesSync())
-                                  : '',
+                                  : base64Encode((await rootBundle.load('assets/images/profile.png')).buffer.asUint8List()),
                             );
                             widget.onAdd.call(newTodo);
                           }
