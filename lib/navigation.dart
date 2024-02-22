@@ -81,8 +81,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           decoration: BoxDecoration(
             border: Border.all(width: 1, color: AppColors.gray),
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
             ),
           ),
           child: BottomNavigationBar(
