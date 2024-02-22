@@ -222,9 +222,9 @@ class _ManageScreenState extends State<ManageScreen> {
                               InkWell(
                                 onTap: () async {
                                   try {
-                                    // Gọi hàm để xóa lịch hẹn khi nhấn cancel
+                                    // Gọi hàm để cập nhật lịch hẹn khi nhấn completed
                                     await firebaseService.updateAppoint(appointList[index].aid!, isCompleted: true);
-                                    // Sau khi xóa thành công, cập nhật danh sách lịch hẹn
+                                    // Sau khi câppj nhật thành công, cập nhật danh sách lịch hẹn
                                     loadAppointAdmin();
                                   } catch (error) {
                                     // Xử lý lỗi nếu có

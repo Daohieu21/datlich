@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:f_quizz/models/appoint_model.dart';
 import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/resources/colors.dart';
@@ -18,8 +19,8 @@ class AppointScreen extends StatefulWidget {
 }
 
 class _AppointScreenState extends State<AppointScreen> {
-  late FirebaseService firebaseService; // Khai báo FirebaseService
 
+  late FirebaseService firebaseService; // Khai báo FirebaseService
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = const TimeOfDay(hour: 7, minute: 0);
   List<TimeOfDay> availableTimes = [
@@ -32,6 +33,21 @@ class _AppointScreenState extends State<AppointScreen> {
     const TimeOfDay(hour: 15, minute: 0),
     const TimeOfDay(hour: 16, minute: 0),
   ];
+  
+  void resetAvailableTimes() {
+    setState(() {
+      availableTimes = [
+    const TimeOfDay(hour: 7, minute: 0),
+    const TimeOfDay(hour: 8, minute: 0),
+    const TimeOfDay(hour: 9, minute: 0),
+    const TimeOfDay(hour: 10, minute: 0),
+    const TimeOfDay(hour: 11, minute: 0),
+    const TimeOfDay(hour: 14, minute: 0),
+    const TimeOfDay(hour: 15, minute: 0),
+    const TimeOfDay(hour: 16, minute: 0),
+  ];
+    });
+  }
 
   ImageProvider<Object>? base64ToImage(String base64String) {
     try {
@@ -42,7 +58,7 @@ class _AppointScreenState extends State<AppointScreen> {
       return null;
     }
   }
-
+  
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -52,10 +68,74 @@ class _AppointScreenState extends State<AppointScreen> {
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
-        selectedDate = DateTime(picked.year, picked.month, picked.day, selectedTime.hour, selectedTime.minute);
+        selectedDate = DateTime(
+          picked.year, 
+          picked.month, 
+          picked.day, 
+          selectedTime.hour, 
+          selectedTime.minute);
       });
+      print('Selected Date: $selectedDate');
+      // Gọi loadAvailableTimes ngay sau khi thiết lập selectedDate
+      loadAvailableTimes();
+      resetAvailableTimes();
     }
   }
+
+Future<void> loadAvailableTimes() async {
+  try {
+    List<AppointModel> adminAppoints = await firebaseService.getAppointAdmin();
+    print('Admin Appoints: $adminAppoints');
+
+    // Tạo danh sách chứa thời gian đã bận
+    List<TimeOfDay> busyTimes = [];
+
+    // Chuyển đổi selectedDate thành DateTime để so sánh với adminAppointDateTime
+      DateTime selectedDateTime = DateTime(
+        selectedDate.year,
+        selectedDate.month,
+        selectedDate.day,
+      );
+
+    // Lặp qua lịch làm việc của bác sĩ để thu thập các thời gian đã bận
+    for (var adminAppoint in adminAppoints) {
+      DateTime adminAppointDateTime = adminAppoint.time;
+      TimeOfDay adminAppointTimeOfDay =
+          TimeOfDay.fromDateTime(adminAppointDateTime);
+
+    // Kiểm tra cả ngày và bác sĩ có phải là người được chọn hay không
+    bool isSameDay = selectedDateTime.year == adminAppointDateTime.year &&
+        selectedDateTime.month == adminAppointDateTime.month &&
+        selectedDateTime.day == adminAppointDateTime.day;
+
+      bool isSameDoctor = widget.doctorInfo.todoid == adminAppoint.todoid;
+
+      print('Selected Date: $selectedDate');
+      print('Admin Appoint Date: $adminAppointDateTime');
+      print('Is Same Day: $isSameDay');
+
+      if (isSameDay && isSameDoctor) {
+        busyTimes.add(adminAppointTimeOfDay);
+      }
+      print('Busy Times: $busyTimes');
+    }
+
+    // Lọc danh sách thời gian rảnh để chỉ giữ lại những thời gian không trùng với thời gian đã bận
+    List<TimeOfDay> filteredTimes = availableTimes
+        .where((time) =>
+            !busyTimes.any((busyTime) =>
+                time.hour == busyTime.hour && time.minute == busyTime.minute))
+        .toList();
+
+        // thieu check Ngay vs nam nen no v
+    setState(() {
+      availableTimes = filteredTimes;
+    });
+    print('Filtered Times: $filteredTimes');
+  } catch (error) {
+    print('Error loading available times: $error');
+  }
+}
 
   @override
   void initState() {
@@ -64,6 +144,7 @@ class _AppointScreenState extends State<AppointScreen> {
     User? user = FirebaseAuth.instance.currentUser;
     print('User: $user');
     firebaseService = FirebaseService(user?.uid ?? '');
+    loadAvailableTimes();
   }
   
   @override
@@ -82,7 +163,7 @@ class _AppointScreenState extends State<AppointScreen> {
               height: MediaQuery.of(context).size.height / 2.1,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: base64ToImage(doctorInfo.imageBase64) ?? const AssetImage("assets/images/profile.png"),
+                  image: base64ToImage(widget.doctorInfo.imageBase64) ?? const AssetImage("assets/images/profile.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -180,7 +261,7 @@ class _AppointScreenState extends State<AppointScreen> {
                                   ),
                                   children: [
                                     TextSpan(
-                                      text: doctorInfo.experience,
+                                      text: widget.doctorInfo.experience,
                                     ),
                                     const TextSpan(
                                       text: ' years',
@@ -229,7 +310,7 @@ class _AppointScreenState extends State<AppointScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    doctorInfo.title,
+                    widget.doctorInfo.title,
                     style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w500,
@@ -238,7 +319,7 @@ class _AppointScreenState extends State<AppointScreen> {
                   ),
                   const SizedBox(height: 15,),
                   Text(
-                    doctorInfo.content,
+                    widget.doctorInfo.content,
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -257,6 +338,7 @@ class _AppointScreenState extends State<AppointScreen> {
                   ),
                   Wrap(
                     children: availableTimes.map((TimeOfDay value) {
+                      print('Displaying time: $value');
                       return SizedBox(
                         width: buttonWidth,
                         child: GestureDetector(
@@ -325,20 +407,25 @@ class _AppointScreenState extends State<AppointScreen> {
                     onTap: () async {
                       try {
                         // Lấy thông tin từ doctorInfo
-                        String title = doctorInfo.title;
-                        String content = doctorInfo.content;
+                        String title = widget.doctorInfo.title;
+                        String content = widget.doctorInfo.content;
                         // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
                         DateTime selectedDateTime = DateTime(
-                          selectedDate.year, selectedDate.month, selectedDate.day,
-                          selectedTime.hour, selectedTime.minute);
+                          selectedDate.year, 
+                          selectedDate.month, 
+                          selectedDate.day,
+                          selectedTime.hour, 
+                          selectedTime.minute);
                         // Gọi đến addAppoint để thêm dữ liệu lên Firebase
                         await firebaseService.addAppoint(
+                          todoid: widget.doctorInfo.todoid ?? '',
                           title: title,
                           content: content,
                           time: selectedDateTime.toIso8601String(),
                         );
                         // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
                         print('Appointment added successfully!');
+                        loadAvailableTimes();
                       } catch (error) {
                         // Xử lý lỗi nếu có
                         print('Error adding appointment: $error');

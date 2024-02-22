@@ -123,6 +123,7 @@ class FirebaseService {
   }
 
 Future<void> addAppoint({
+  required String todoid,
   required String title,
   required String content,
   required String time,
@@ -132,6 +133,7 @@ Future<void> addAppoint({
     
     // Tạo một đối tượng AppointModel mà không cần aid ban đầu
     AppointModel appoint = AppointModel(
+      todoid: todoid,
       title: title,
       content: content,
       time: parsedDateTime,
