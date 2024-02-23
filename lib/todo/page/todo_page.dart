@@ -23,7 +23,7 @@ class TodoPage extends StatefulWidget {
 class _TodoPageState extends State<TodoPage> {
   final ScrollController _scrollController = ScrollController();
   Map<String, List<TodoModel>> todoMap = {};
-  int selectedIndex = -1;
+  //int selectedIndex = -1;
 
   @override
   void initState() {
@@ -120,8 +120,8 @@ class _TodoPageState extends State<TodoPage> {
                   showTodoBottomSheet(context, todoList[index], index);
                 },
                 child: Container(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+                  padding: const EdgeInsets.only(bottom: 10, top: 10),
+                  margin: const EdgeInsets.only(top: 0, left: 10, right: 10),
                   decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(width: 2, color: AppColors.gray),
