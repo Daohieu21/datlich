@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_quizz/models/appoint_model.dart';
 import 'package:f_quizz/models/firebase_service.dart';
+import 'package:f_quizz/models/language_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -71,10 +72,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Center(
+        title: Center(
           child: Text(
-            "Schedule",
-            style: TextStyle(
+            translation(context).schedule,
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'Rubik',
               fontSize: 24,
@@ -176,7 +177,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    appoint[index].isCompleted ? "Completed" : "Confirmed",
+                                    appoint[index].isCompleted ? translation(context).success : translation(context).porocessing,
                                     style: const TextStyle(
                                       color: Colors.black54,
                                     ),
@@ -190,16 +191,42 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               InkWell(
-                                onTap: () async {
-                                  try {
-                                    // Gọi hàm để xóa lịch hẹn khi nhấn cancel
-                                    await firebaseService.deleteAppoint(appoint[index].aid!);
-                                    // Sau khi xóa thành công, cập nhật danh sách lịch hẹn
-                                    loadAppoint();
-                                  } catch (error) {
-                                    // Xử lý lỗi nếu có
-                                    print('Error deleting appoint: $error');
-                                  }
+                                onTap: () {
+                                  // Hiển thị hộp thoại xác nhận
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text(translation(context).notice),
+                                        content: Text(translation(context).delete),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              // Đóng hộp thoại
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(translation(context).cancel),
+                                          ),
+                                          TextButton(
+                                            onPressed: () async {
+                                              // Đóng hộp thoại trước khi thực hiện hủy
+                                              Navigator.of(context).pop();
+                                              try {
+                                                // Gọi hàm để xóa lịch hẹn khi nhấn cancel
+                                                await firebaseService.deleteAppoint(appoint[index].aid!);
+                                                // Sau khi xóa thành công, cập nhật danh sách lịch hẹn
+                                                loadAppoint();
+                                              } catch (error) {
+                                                // Xử lý lỗi nếu có
+                                                print('Error deleting appoint: $error');
+                                              }
+                                            },
+                                            child: Text(translation(context).ok),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                                 child: Container(
                                   width: 150,
@@ -208,10 +235,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     color: const Color(0xFFF4F6FA),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
-                                      "Cancel",
-                                      style: TextStyle(
+                                      translation(context).cancel,
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black54,

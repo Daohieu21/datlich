@@ -76,9 +76,9 @@ class _AppointScreenState extends State<AppointScreen> {
           selectedTime.minute);
       });
       print('Selected Date: $selectedDate');
+      resetAvailableTimes();
       // Gọi loadAvailableTimes ngay sau khi thiết lập selectedDate
       loadAvailableTimes();
-      resetAvailableTimes();
     }
   }
 
@@ -91,11 +91,11 @@ Future<void> loadAvailableTimes() async {
     List<TimeOfDay> busyTimes = [];
 
     // Chuyển đổi selectedDate thành DateTime để so sánh với adminAppointDateTime
-      DateTime selectedDateTime = DateTime(
-        selectedDate.year,
-        selectedDate.month,
-        selectedDate.day,
-      );
+      // DateTime selectedDateTime = DateTime(
+      //   selectedDate.year,
+      //   selectedDate.month,
+      //   selectedDate.day,
+      // );
 
     // Lặp qua lịch làm việc của bác sĩ để thu thập các thời gian đã bận
     for (var adminAppoint in adminAppoints) {
@@ -104,9 +104,9 @@ Future<void> loadAvailableTimes() async {
           TimeOfDay.fromDateTime(adminAppointDateTime);
 
     // Kiểm tra cả ngày và bác sĩ có phải là người được chọn hay không
-    bool isSameDay = selectedDateTime.year == adminAppointDateTime.year &&
-        selectedDateTime.month == adminAppointDateTime.month &&
-        selectedDateTime.day == adminAppointDateTime.day;
+    bool isSameDay = selectedDate.year == adminAppointDateTime.year &&
+        selectedDate.month == adminAppointDateTime.month &&
+        selectedDate.day == adminAppointDateTime.day;
 
       bool isSameDoctor = widget.doctorInfo.todoid == adminAppoint.todoid;
 
@@ -152,290 +152,331 @@ Future<void> loadAvailableTimes() async {
     TodoModel doctorInfo = widget.doctorInfo;
     double buttonWidth = (MediaQuery.of(context).size.width - 40) / 4;
     print("Doctor Info: $doctorInfo");
-    return Material(
-      color: const Color(0xFFD9E4EE),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2.1,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: base64ToImage(widget.doctorInfo.imageBase64) ?? const AssetImage("assets/images/profile.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Container(
+    return Scaffold(
+      body: Material(
+        color: const Color(0xFFD9E4EE),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 2.1,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      AppColors.blu1.withOpacity(0.6),
-                      AppColors.blu1.withOpacity(0),
-                      AppColors.blu1.withOpacity(0),
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
+                  image: DecorationImage(
+                    image: base64ToImage(widget.doctorInfo.imageBase64) ?? const AssetImage("assets/images/profile.png"),
+                    fit: BoxFit.cover,
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.all(8),
-                            height: 45,
-                            width: 45,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 4,
-                                  spreadRadius: 2,
-                                )
-                              ]
-                            ),
-                            child: const Center(
-                              child: Icon(Icons.favorite_outline,
-                              color: Colors.blue,
-                              size: 28,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.blu1.withOpacity(0.6),
+                        AppColors.blu1.withOpacity(0),
+                        AppColors.blu1.withOpacity(0),
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
                     ),
-                    SizedBox(height: 80,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
-                                "Patients",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Nút Back
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(8),
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
                                   color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 4,
+                                      spreadRadius: 2,
+                                    )
+                                  ],
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.blue,
+                                    size: 28,
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 8,),
-                              Text(
-                                "1.8k",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
+                            ),
+                            // Nút Favorite
+                            Container(
+                              margin: const EdgeInsets.all(8),
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 4,
+                                    spreadRadius: 2,
+                                  )
+                                ],
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.favorite_outline,
+                                  color: Colors.blue,
+                                  size: 28,
                                 ),
                               ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                translation(context).experience,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(height: 8,),
-                              RichText(
-                                text: TextSpan(
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 80,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  translation(context).patients,
                                   style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 8,),
+                                const Text(
+                                  "1.8k",
+                                  style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white,
                                   ),
-                                  children: [
-                                    TextSpan(
-                                      text: widget.doctorInfo.experience,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  translation(context).experience,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 8,),
+                                RichText(
+                                  text: TextSpan(
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
                                     ),
-                                    const TextSpan(
-                                      text: ' years',
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                    children: [
+                                      TextSpan(
+                                        text: widget.doctorInfo.experience,
                                       ),
-                                    ),
-                                  ],
+                                      const WidgetSpan(child: SizedBox(width: 5),),
+                                      TextSpan(
+                                        text: translation(context).year,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
-                                "Rating",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  translation(context).rating,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 8,),
-                              Text(
-                                "4.9",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
+                                const SizedBox(height: 8,),
+                                const Text(
+                                  "4.9",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.doctorInfo.title,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.blue,
+              const SizedBox(height: 10,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.doctorInfo.title,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.blue,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15,),
-                  Text(
-                    widget.doctorInfo.content,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black.withOpacity(0.6),
+                    const SizedBox(height: 15,),
+                    Text(
+                      widget.doctorInfo.content,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                      textAlign: TextAlign.justify,
                     ),
-                    textAlign: TextAlign.justify,
-                  ),
-                  const SizedBox(height: 15,),
-                  Text(
-                    "Select Hours",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black.withOpacity(0.6),
+                    const SizedBox(height: 15,),
+                    Text(
+                      translation(context).hours,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
                     ),
-                  ),
-                  Wrap(
-                    children: availableTimes.map((TimeOfDay value) {
-                      print('Displaying time: $value');
-                      return SizedBox(
-                        width: buttonWidth,
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedTime = value;
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            margin: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: selectedTime == value ? Colors.blue : Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                    Wrap(
+                      children: availableTimes.map((TimeOfDay value) {
+                        print('Displaying time: $value');
+                        return SizedBox(
+                          width: buttonWidth,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedTime = value;
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              margin: const EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                color: selectedTime == value ? Colors.blue : Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                value.format(context),
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
-                            child: Text(
-                              value.format(context),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 15,),
+                    Text(
+                      translation(context).date,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => _selectDate(context),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              DateFormat('dd-MM-yyyy').format(selectedDate),
                               style: const TextStyle(
-                                fontSize: 15,
+                                fontSize: 16,
                                 color: Colors.black,
                               ),
                             ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 15,),
-                  Text(
-                    "Select Date",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => _selectDate(context),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.black.withOpacity(0.6),
-                          ),
+                            const Icon(Icons.calendar_today),
+                          ],
                         ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            DateFormat('dd-MM-yyyy').format(selectedDate),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                    ),
+                    const SizedBox(height: 30,),
+                    Button(
+                      textButton: translation(context).appoint,
+                      onTap: () async {
+                        try {
+                          // Lấy thông tin từ doctorInfo
+                          String title = widget.doctorInfo.title;
+                          String content = widget.doctorInfo.content;
+                          // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
+                          DateTime selectedDateTime = DateTime(
+                            selectedDate.year, 
+                            selectedDate.month, 
+                            selectedDate.day,
+                            selectedTime.hour, 
+                            selectedTime.minute);
+                          // Gọi đến addAppoint để thêm dữ liệu lên Firebase
+                          await firebaseService.addAppoint(
+                            todoid: widget.doctorInfo.todoid ?? '',
+                            title: title,
+                            content: content,
+                            time: selectedDateTime.toIso8601String(),
+                          );
+                          // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
+                          // Hiển thị Snackbar khi đặt lịch thành công
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Đặt lịch thành công. Vui lòng kiểm tra hòm thư!'),
+                              duration: Duration(seconds: 3), // Thời gian hiển thị Snackbar
                             ),
-                          ),
-                          const Icon(Icons.calendar_today),
-                        ],
-                      ),
+                          );
+                          print('Appointment added successfully!');
+                          loadAvailableTimes();
+                        } catch (error) {
+                          // Xử lý lỗi nếu có
+                          print('Error adding appointment: $error');
+                        }
+                      },
                     ),
-                  ),
-                  const SizedBox(height: 30,),
-                  Button(
-                    textButton: "Book Appointment",
-                    onTap: () async {
-                      try {
-                        // Lấy thông tin từ doctorInfo
-                        String title = widget.doctorInfo.title;
-                        String content = widget.doctorInfo.content;
-                        // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
-                        DateTime selectedDateTime = DateTime(
-                          selectedDate.year, 
-                          selectedDate.month, 
-                          selectedDate.day,
-                          selectedTime.hour, 
-                          selectedTime.minute);
-                        // Gọi đến addAppoint để thêm dữ liệu lên Firebase
-                        await firebaseService.addAppoint(
-                          todoid: widget.doctorInfo.todoid ?? '',
-                          title: title,
-                          content: content,
-                          time: selectedDateTime.toIso8601String(),
-                        );
-                        // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
-                        print('Appointment added successfully!');
-                        loadAvailableTimes();
-                      } catch (error) {
-                        // Xử lý lỗi nếu có
-                        print('Error adding appointment: $error');
-                      }
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

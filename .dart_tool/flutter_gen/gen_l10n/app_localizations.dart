@@ -144,7 +144,7 @@ abstract class AppLocalizations {
   /// No description provided for @name.
   ///
   /// In en, this message translates to:
-  /// **'Name'**
+  /// **'Nickname'**
   String get name;
 
   /// No description provided for @email.
@@ -189,28 +189,40 @@ abstract class AppLocalizations {
   /// **'New name'**
   String get new_name;
 
+  /// No description provided for @manage.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage'**
+  String get manage;
+
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
   /// **'Home'**
   String get home;
 
-  /// No description provided for @todo.
+  /// No description provided for @doctor.
   ///
   /// In en, this message translates to:
-  /// **'Todo'**
-  String get todo;
+  /// **'Doctor'**
+  String get doctor;
+
+  /// No description provided for @schedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule'**
+  String get schedule;
 
   /// No description provided for @title.
   ///
   /// In en, this message translates to:
-  /// **'Title'**
+  /// **'Name'**
   String get title;
 
   /// No description provided for @content.
   ///
   /// In en, this message translates to:
-  /// **'Content'**
+  /// **'Specialist'**
   String get content;
 
   /// No description provided for @start.
@@ -236,6 +248,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ok'**
   String get ok;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get yes;
 
   /// No description provided for @cancel.
   ///
@@ -336,7 +354,7 @@ abstract class AppLocalizations {
   /// No description provided for @delete.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to delete this todo ?'**
+  /// **'Are you sure you want to delete ?'**
   String get delete;
 
   /// No description provided for @experience.
@@ -344,6 +362,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Experience'**
   String get experience;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
+  /// No description provided for @porocessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Porocessing'**
+  String get porocessing;
+
+  /// No description provided for @health.
+  ///
+  /// In en, this message translates to:
+  /// **'You Health is Our\nFirst Priority'**
+  String get health;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get category;
+
+  /// No description provided for @recommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Doctors'**
+  String get recommended;
+
+  /// No description provided for @dental.
+  ///
+  /// In en, this message translates to:
+  /// **'Dental'**
+  String get dental;
+
+  /// No description provided for @heart.
+  ///
+  /// In en, this message translates to:
+  /// **'Heart'**
+  String get heart;
+
+  /// No description provided for @eye.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye'**
+  String get eye;
+
+  /// No description provided for @brain.
+  ///
+  /// In en, this message translates to:
+  /// **'Brain'**
+  String get brain;
+
+  /// No description provided for @ear.
+  ///
+  /// In en, this message translates to:
+  /// **'Ear'**
+  String get ear;
+
+  /// No description provided for @dermatology.
+  ///
+  /// In en, this message translates to:
+  /// **'Dermatology'**
+  String get dermatology;
+
+  /// No description provided for @gastroenterology.
+  ///
+  /// In en, this message translates to:
+  /// **'Gastroenterology'**
+  String get gastroenterology;
+
+  /// No description provided for @patients.
+  ///
+  /// In en, this message translates to:
+  /// **'Patients'**
+  String get patients;
+
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Hours'**
+  String get hours;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Date'**
+  String get date;
+
+  /// No description provided for @appoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Appointment'**
+  String get appoint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

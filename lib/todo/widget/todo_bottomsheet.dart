@@ -36,6 +36,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
     super.initState();
     if (widget.currentTodo != null) {
       titleController.text = widget.currentTodo?.title ?? '';
+      contentController.text = widget.currentTodo?.content ?? '';
       selectedCategory = widget.currentTodo?.content ?? '';
       experienceController.text = widget.currentTodo?.experience ?? '';
     }
@@ -65,17 +66,18 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
   final TextEditingController contentController = TextEditingController();
   final TextEditingController experienceController = TextEditingController();
   String selectedCategory = ''; // Thêm biến để lưu trữ danh mục được chọn
-  List<String> catNames = [
-    "Dental",
-    "Heart",
-    "Eye",
-    "Brain",
-    "Ear"
-  ];
+  List<String> catNames = [];
 
   int choose = -1;
   @override
   Widget build(BuildContext context) {
+    catNames = [
+      translation(context).dental,
+      translation(context).heart,
+      translation(context).eye,
+      translation(context).brain,
+      translation(context).ear
+    ];
     final Size size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -144,13 +146,10 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                             Radius.circular(18.0),
                           ),
                         ),
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            showCategoryPicker(context);
-                          },
-                          child: const Icon(Icons.arrow_drop_down),
-                        ),
                       ),
+                      onTap: () {
+                        showCategoryPicker(context);
+                      },
                       validator: (value) => ValidatorUtils.todoValidate(context, value),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
@@ -222,7 +221,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Choose Category"),
+          //title: const Text("Choose Category"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: catNames.map((category) {

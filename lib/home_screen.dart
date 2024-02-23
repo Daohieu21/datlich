@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_quizz/appoint_screen.dart';
 import 'package:f_quizz/models/firebase_service.dart';
+import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/models/todo_model.dart';
 import 'package:f_quizz/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,13 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
     role: '',
   );
 
-  List catNames = [
-    "Dental",
-    "Heart",
-    "Eye",
-    "Brain",
-    "Ear"
-  ];
+  // List catNames = [
+  //   "Dental",
+  //   "Heart",
+  //   "Eye",
+  //   "Brain",
+  //   "Ear"
+  // ];
+
+  List<String> catNames = [];
 
   List<Icon> catIcons = [
     Icon(MdiIcons.toothOutline, color: Colors.blue, size: 30),
@@ -119,6 +122,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    catNames = [
+      translation(context).dental,
+      translation(context).heart,
+      translation(context).eye,
+      translation(context).brain,
+      translation(context).ear
+    ];
     return Material(
       //color: const Color(0xFFD9E4EE),
       color: Colors.white,
@@ -178,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 15,),
                         Text(
-                          "Hi, ${loggedInUser.fullName}",
+                          "${translation(context).hello}, ${loggedInUser.fullName}",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -186,9 +196,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         const SizedBox(height: 10,),
-                        const Text(
-                          "You Health is Our\nFirst Priority",
-                          style: TextStyle(
+                        Text(
+                          translation(context).health,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,
                             fontWeight: FontWeight.w500,
@@ -220,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: "Search here ...",
+                              hintText: translation(context).enter,
                               hintStyle: TextStyle(
                                 color: Colors.black.withOpacity(0.5),
                               ),
@@ -237,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Text(
-                      "Categories",
+                      translation(context).category,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -298,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Text(
-                      "Recommended Doctors",
+                      translation(context).recommended,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,

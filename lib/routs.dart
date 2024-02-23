@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:f_quizz/login/page/login.dart';
 import 'package:f_quizz/signup/page/sign_up.dart';
 import 'package:f_quizz/splash_screen.dart';
-import 'package:f_quizz/home.dart';
 import 'package:f_quizz/intro.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

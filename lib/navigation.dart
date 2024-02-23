@@ -96,16 +96,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               BottomNavigationBarItem(
                 icon: Container(
                   padding: const EdgeInsets.only(bottom: 6),
-                  child: const Icon(Icons.check_box),
+                  child: const Icon(Icons.library_books),
                 ),
-                label: translation(context).todo,
+                label: translation(context).doctor,
               ),
               BottomNavigationBarItem(
                 icon: Container(
                   padding: const EdgeInsets.only(bottom: 6),
                   child: const Icon(Icons.manage_history),
                 ),
-                label: 'Manage',
+                label: translation(context).manage,
               ),
               BottomNavigationBarItem(
                 icon: Container(
@@ -119,7 +119,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                   padding: const EdgeInsets.only(bottom: 6),
                   child: const Icon(Icons.calendar_month_outlined),
                 ),
-                label: 'Schedule',
+                label: translation(context).schedule,
               ),
               BottomNavigationBarItem(
                 icon: Container(

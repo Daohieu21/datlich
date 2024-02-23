@@ -29,7 +29,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get account_information => 'Account information';
 
   @override
-  String get name => 'Name';
+  String get name => 'Nickname';
 
   @override
   String get email => 'Email';
@@ -53,16 +53,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get new_name => 'New name';
 
   @override
+  String get manage => 'Manage';
+
+  @override
   String get home => 'Home';
 
   @override
-  String get todo => 'Todo';
+  String get doctor => 'Doctor';
 
   @override
-  String get title => 'Title';
+  String get schedule => 'Schedule';
 
   @override
-  String get content => 'Content';
+  String get title => 'Name';
+
+  @override
+  String get content => 'Specialist';
 
   @override
   String get start => 'Start :';
@@ -75,6 +81,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'Ok';
+
+  @override
+  String get yes => 'Confirm';
 
   @override
   String get cancel => 'Cancel';
@@ -125,8 +134,62 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enter => 'Enter keywords ...';
 
   @override
-  String get delete => 'Are you sure you want to delete this todo ?';
+  String get delete => 'Are you sure you want to delete ?';
 
   @override
   String get experience => 'Experience';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get porocessing => 'Porocessing';
+
+  @override
+  String get health => 'You Health is Our\nFirst Priority';
+
+  @override
+  String get category => 'Categories';
+
+  @override
+  String get recommended => 'Recommended Doctors';
+
+  @override
+  String get dental => 'Dental';
+
+  @override
+  String get heart => 'Heart';
+
+  @override
+  String get eye => 'Eye';
+
+  @override
+  String get brain => 'Brain';
+
+  @override
+  String get ear => 'Ear';
+
+  @override
+  String get dermatology => 'Dermatology';
+
+  @override
+  String get gastroenterology => 'Gastroenterology';
+
+  @override
+  String get patients => 'Patients';
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get hours => 'Select Hours';
+
+  @override
+  String get date => 'Select Date';
+
+  @override
+  String get appoint => 'Book Appointment';
 }

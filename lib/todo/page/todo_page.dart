@@ -165,12 +165,19 @@ class _TodoPageState extends State<TodoPage> {
                                     color: Colors.black,
                                   ),
                                   children: [
+                                    TextSpan(
+                                      text: translation(context).title,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                     const TextSpan(
-                                      text: 'Name: ',
+                                      text: ':',
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
                                     ),
+                                    const WidgetSpan(child: SizedBox(width: 5),),
                                     TextSpan(
                                       text: todoList[index].title,
                                     ),
@@ -187,12 +194,19 @@ class _TodoPageState extends State<TodoPage> {
                                     color: Colors.black,
                                   ),
                                   children: [
+                                    TextSpan(
+                                      text: translation(context).content,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                     const TextSpan(
-                                      text: 'Specialist: ',
+                                      text: ':',
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
                                     ),
+                                    const WidgetSpan(child: SizedBox(width: 5),),
                                     TextSpan(
                                       text: todoList[index].content,
                                     ),
@@ -209,18 +223,26 @@ class _TodoPageState extends State<TodoPage> {
                                     color: Colors.black,
                                   ),
                                   children: [
+                                    TextSpan(
+                                      text: translation(context).experience,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                     const TextSpan(
-                                      text: 'Experience: ',
+                                      text: ':',
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
                                     ),
+                                    const WidgetSpan(child: SizedBox(width: 5),),
                                     TextSpan(
                                       text: todoList[index].experience,
                                     ),
-                                    const TextSpan(
-                                      text: ' years',
-                                      style: TextStyle(
+                                    const WidgetSpan(child: SizedBox(width: 5),),
+                                    TextSpan(
+                                      text: translation(context).year,
+                                      style: const TextStyle(
                                         color: Colors.black,
                                       ),
                                     ),

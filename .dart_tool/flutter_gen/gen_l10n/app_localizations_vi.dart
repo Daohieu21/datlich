@@ -29,7 +29,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get account_information => 'Thông tin tài khoản';
 
   @override
-  String get name => 'Tên';
+  String get name => 'Biệt danh';
 
   @override
   String get email => 'Email';
@@ -53,16 +53,22 @@ class AppLocalizationsVi extends AppLocalizations {
   String get new_name => 'Tên mới';
 
   @override
+  String get manage => 'Quản lý';
+
+  @override
   String get home => 'Trang chủ';
 
   @override
-  String get todo => 'Ghi chú';
+  String get doctor => 'Bác sĩ';
 
   @override
-  String get title => 'Tiêu đề';
+  String get schedule => 'Lịch trình';
 
   @override
-  String get content => 'Nội dung';
+  String get title => 'Họ tên';
+
+  @override
+  String get content => 'Chuyên khoa';
 
   @override
   String get start => 'Bắt đầu :';
@@ -75,6 +81,9 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get ok => 'Đồng ý';
+
+  @override
+  String get yes => 'Xác nhận';
 
   @override
   String get cancel => 'Hủy';
@@ -113,7 +122,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get password_format => 'Định dạng không hợp lệ';
 
   @override
-  String get password_characters => 'Password has at least 6 characters: 1 number, 1 uppercase letter, 1 special character';
+  String get password_characters => 'Mật khẩu có ít nhất 6 kí tự, bao gồm: 1 số, 1 chữ hoa, 1 kí tự đặc biệt';
 
   @override
   String get successfully_created => 'Tạo tài khoản thành công';
@@ -125,8 +134,62 @@ class AppLocalizationsVi extends AppLocalizations {
   String get enter => 'Nhập từ khóa ... ';
 
   @override
-  String get delete => 'Bạn có chắc chắn muốn xóa việc cần làm này ?';
+  String get delete => 'Bạn có chắc chắn muốn xóa ?';
 
   @override
   String get experience => 'Kinh nghiệm';
+
+  @override
+  String get success => 'Thành công';
+
+  @override
+  String get porocessing => 'Đang xử lý';
+
+  @override
+  String get health => 'Sức khỏe của bạn là\nưu tiên hàng đầu của chúng tôi';
+
+  @override
+  String get category => 'Danh mục';
+
+  @override
+  String get recommended => 'Bác sĩ được đề xuất';
+
+  @override
+  String get dental => 'Răng';
+
+  @override
+  String get heart => 'Tim Mạch';
+
+  @override
+  String get eye => 'Mắt';
+
+  @override
+  String get brain => 'Thần Kinh';
+
+  @override
+  String get ear => 'Tai';
+
+  @override
+  String get dermatology => 'Da Liễu';
+
+  @override
+  String get gastroenterology => 'Tiêu Hóa';
+
+  @override
+  String get patients => 'Người bệnh';
+
+  @override
+  String get year => 'Năm';
+
+  @override
+  String get rating => 'Đánh giá';
+
+  @override
+  String get hours => 'Chọn giờ';
+
+  @override
+  String get date => 'Chọn ngày';
+
+  @override
+  String get appoint => 'Đặt lịch';
 }
