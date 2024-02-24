@@ -93,29 +93,39 @@ class FirebaseService {
 
   Future<List<AppointModel>> getAppointAdmin() async {
     try {
+      UserModel? userInfo = await getUserInfo();
+      if (userInfo != null && userInfo.role == 'admin') {
+
       Response response = await dio.get(
         'https://todo-5b469-default-rtdb.asia-southeast1.firebasedatabase.app/appointadmin.json',
       );
 
-      if (response.statusCode == 200) {
-        // Kiểm tra xem response.data có null không
-        if (response.data != null) {
-          final Map<String, dynamic> rawData = response.data;
-          // Chuyển đổi dữ liệu thành danh sách TodoModel
-          final appoint = rawData.entries
-            .where((entry) => entry.value != null)
-            .map((entry) => AppointModel.fromMap(entry.value))
-            .toList();
+        if (response.statusCode == 200) {
+          // Kiểm tra xem response.data có null không
+          if (response.data != null) {
+            final Map<String, dynamic> rawData = response.data;
+            // Chuyển đổi dữ liệu thành danh sách TodoModel
+            final appoint = rawData.entries
+              .where((entry) => entry.value != null)
+              .map((entry) => AppointModel.fromMap(entry.value))
+              .toList();
 
-          return appoint;
+            return appoint;
+          } else {
+            print('Response data is null');
+            return [];
+          }
         } else {
-          print('Response data is null');
+          print('Failed to load todos: ${response.statusCode}');
           return [];
         }
+
       } else {
-        print('Failed to load todos: ${response.statusCode}');
-        return [];
+      print('Permission denied. User does not have admin role.');
+      // Xử lý thông báo hoặc các hành động khác khi không có quyền
+      return [];
       }
+
     } catch (error) {
       print('Error getting todos: $error');
       throw error;

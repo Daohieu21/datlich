@@ -192,4 +192,13 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get appoint => 'Đặt lịch';
+
+  @override
+  String get statistic => 'Thống kê';
+
+  @override
+  String get scheduledsuccess => 'Đặt lịch thành công';
+
+  @override
+  String get pressback => 'Nhấn back lần nữa để thoát';
 }

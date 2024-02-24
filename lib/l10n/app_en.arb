@@ -61,5 +61,8 @@
     "rating": "Rating",
     "hours": "Select Hours",
     "date": "Select Date",
-    "appoint": "Book Appointment"
+    "appoint": "Book Appointment",
+    "statistic": "Statistic",
+    "scheduledsuccess": "Scheduled successfully",
+    "pressback": "Press back again to exit"
 }

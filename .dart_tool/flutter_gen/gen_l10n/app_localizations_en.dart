@@ -192,4 +192,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appoint => 'Book Appointment';
+
+  @override
+  String get statistic => 'Statistic';
+
+  @override
+  String get scheduledsuccess => 'Scheduled successfully';
+
+  @override
+  String get pressback => 'Press back again to exit';
 }

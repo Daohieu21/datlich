@@ -38,9 +38,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             const Duration(seconds: 2)) {
       _currentBackPressTime = DateTime.now();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Nhấn back lần nữa để thoát'),
-          duration: Duration(seconds: 2),
+        SnackBar(
+          content: Text(translation(context).pressback),
+          duration: const Duration(seconds: 2),
         ),
       );
       return false;
@@ -107,7 +107,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                   padding: const EdgeInsets.only(bottom: 6),
                   child: const Icon(Icons.manage_accounts),
                 ),
-                label: translation(context).manage,
+                label: translation(context).statistic,
               ),
               BottomNavigationBarItem(
                 icon: Container(

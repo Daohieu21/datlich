@@ -387,11 +387,13 @@ Future<void> loadAvailableTimes() async {
                                 color: selectedTime == value ? Colors.blue : Colors.white,
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: Text(
-                                value.format(context),
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black,
+                              child: Center(
+                                child: Text(
+                                  value.format(context),
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
@@ -435,42 +437,45 @@ Future<void> loadAvailableTimes() async {
                       ),
                     ),
                     const SizedBox(height: 30,),
-                    Button(
-                      textButton: translation(context).appoint,
-                      onTap: () async {
-                        try {
-                          // Lấy thông tin từ doctorInfo
-                          String title = widget.doctorInfo.title;
-                          String content = widget.doctorInfo.content;
-                          // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
-                          DateTime selectedDateTime = DateTime(
-                            selectedDate.year, 
-                            selectedDate.month, 
-                            selectedDate.day,
-                            selectedTime.hour, 
-                            selectedTime.minute);
-                          // Gọi đến addAppoint để thêm dữ liệu lên Firebase
-                          await firebaseService.addAppoint(
-                            todoid: widget.doctorInfo.todoid ?? '',
-                            title: title,
-                            content: content,
-                            time: selectedDateTime.toIso8601String(),
-                          );
-                          // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
-                          // Hiển thị Snackbar khi đặt lịch thành công
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Đặt lịch thành công. Vui lòng kiểm tra hòm thư!'),
-                              duration: Duration(seconds: 3), // Thời gian hiển thị Snackbar
-                            ),
-                          );
-                          print('Appointment added successfully!');
-                          loadAvailableTimes();
-                        } catch (error) {
-                          // Xử lý lỗi nếu có
-                          print('Error adding appointment: $error');
-                        }
-                      },
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 100),
+                      child: Button(
+                        textButton: translation(context).appoint,
+                        onTap: () async {
+                          try {
+                            // Lấy thông tin từ doctorInfo
+                            String title = widget.doctorInfo.title;
+                            String content = widget.doctorInfo.content;
+                            // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
+                            DateTime selectedDateTime = DateTime(
+                              selectedDate.year, 
+                              selectedDate.month, 
+                              selectedDate.day,
+                              selectedTime.hour, 
+                              selectedTime.minute);
+                            // Gọi đến addAppoint để thêm dữ liệu lên Firebase
+                            await firebaseService.addAppoint(
+                              todoid: widget.doctorInfo.todoid ?? '',
+                              title: title,
+                              content: content,
+                              time: selectedDateTime.toIso8601String(),
+                            );
+                            // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
+                            // Hiển thị Snackbar khi đặt lịch thành công
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(translation(context).scheduledsuccess),
+                                duration: const Duration(seconds: 3), // Thời gian hiển thị Snackbar
+                              ),
+                            );
+                            print('Appointment added successfully!');
+                            loadAvailableTimes();
+                          } catch (error) {
+                            // Xử lý lỗi nếu có
+                            print('Error adding appointment: $error');
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),

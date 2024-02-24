@@ -105,7 +105,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
         backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            translation(context).manage,
+            translation(context).statistic,
             style: const TextStyle(
               color: Colors.black,
               fontFamily: 'Rubik',
@@ -143,6 +143,36 @@ class _StatisticScreenState extends State<StatisticScreen> {
             onPageChanged: (focusedDay) {
               _focusedDay = focusedDay;
             },
+            calendarBuilders: CalendarBuilders(
+              selectedBuilder: (context, date, events) {
+                return Container(
+                  margin: const EdgeInsets.all(4.0),
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: Colors.blue, // Màu sắc khi ngày được chọn
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    date.day.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                );
+              },
+              todayBuilder: (context, date, events) {
+                return Container(
+                  margin: const EdgeInsets.all(4.0),
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: Colors.red, // Màu sắc cho ngày hiện tại
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    date.day.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                );
+              },
+            ),
           ),
           const SizedBox(height: 10),
           Expanded(
@@ -236,7 +266,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                       ),
                                       children: [
                                         TextSpan(
-                                          text: translation(context).experience,
+                                          text: translation(context).schedule,
                                           style: const TextStyle(
                                             color: Colors.black,
                                           ),

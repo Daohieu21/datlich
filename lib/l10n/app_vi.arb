@@ -61,5 +61,8 @@
     "rating": "Đánh giá",
     "hours": "Chọn giờ",
     "date": "Chọn ngày",
-    "appoint": "Đặt lịch"
+    "appoint": "Đặt lịch",
+    "statistic": "Thống kê",
+    "scheduledsuccess": "Đặt lịch thành công",
+    "pressback": "Nhấn back lần nữa để thoát"
 }

@@ -470,6 +470,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Book Appointment'**
   String get appoint;
+
+  /// No description provided for @statistic.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistic'**
+  String get statistic;
+
+  /// No description provided for @scheduledsuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled successfully'**
+  String get scheduledsuccess;
+
+  /// No description provided for @pressback.
+  ///
+  /// In en, this message translates to:
+  /// **'Press back again to exit'**
+  String get pressback;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
