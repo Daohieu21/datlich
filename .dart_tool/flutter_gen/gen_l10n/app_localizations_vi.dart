@@ -155,19 +155,19 @@ class AppLocalizationsVi extends AppLocalizations {
   String get recommended => 'Bác sĩ được đề xuất';
 
   @override
-  String get dental => 'Răng';
+  String get dental => 'Răng Hàm Mặt';
 
   @override
   String get heart => 'Tim Mạch';
 
   @override
-  String get eye => 'Mắt';
+  String get eye => 'Nhãn khoa';
 
   @override
   String get brain => 'Thần Kinh';
 
   @override
-  String get ear => 'Tai';
+  String get ear => 'Tai Mũi Họng';
 
   @override
   String get dermatology => 'Da Liễu';
@@ -201,4 +201,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get pressback => 'Nhấn back lần nữa để thoát';
+
+  @override
+  String get status => 'Trạng thái';
 }

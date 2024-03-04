@@ -49,11 +49,11 @@
     "health": "Sức khỏe của bạn là\nưu tiên hàng đầu của chúng tôi",
     "category": "Danh mục",
     "recommended": "Bác sĩ được đề xuất",
-    "dental": "Răng",
+    "dental": "Răng Hàm Mặt",
     "heart": "Tim Mạch",
-    "eye": "Mắt",
+    "eye": "Nhãn khoa",
     "brain": "Thần Kinh",
-    "ear": "Tai",
+    "ear": "Tai Mũi Họng",
     "dermatology": "Da Liễu",
     "gastroenterology": "Tiêu Hóa",
     "patients": "Người bệnh",
@@ -61,5 +61,9 @@
     "rating": "Đánh giá",
     "hours": "Chọn giờ",
     "date": "Chọn ngày",
-    "appoint": "Đặt lịch"
+    "appoint": "Đặt lịch",
+    "statistic": "Thống kê",
+    "scheduledsuccess": "Đặt lịch thành công",
+    "pressback": "Nhấn back lần nữa để thoát",
+    "status": "Trạng thái"
 }

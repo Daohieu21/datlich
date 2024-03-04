@@ -64,5 +64,6 @@
     "appoint": "Book Appointment",
     "statistic": "Statistic",
     "scheduledsuccess": "Scheduled successfully",
-    "pressback": "Press back again to exit"
+    "pressback": "Press back again to exit",
+    "status": "Status"
 }

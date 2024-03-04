@@ -66,7 +66,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
 
   Future<void> getAppoint() async {
     try {
-      List<AppointModel> fetchedAppoint = await firebaseService.getAppoint();
+      List<AppointModel> fetchedAppoint = await firebaseService.getAppointAdmin();
       setState(() {
         appointList = fetchedAppoint;
       });
@@ -281,13 +281,34 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                         TextSpan(
                                           text: DateFormat.Hm().format(busyDoctors[index].time),
                                         ),
-                                        // const WidgetSpan(child: SizedBox(width: 5),),
-                                        // TextSpan(
-                                        //   text: translation(context).year,
-                                        //   style: const TextStyle(
-                                        //     color: Colors.black,
-                                        //   ),
-                                        // ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.normal,
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: translation(context).status,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const TextSpan(
+                                          text: ':',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const WidgetSpan(child: SizedBox(width: 5),),
+                                        TextSpan(
+                                          text: busyDoctors[index].isCompleted ? translation(context).success : translation(context).porocessing,
+                                        ),
                                       ],
                                     ),
                                   ),

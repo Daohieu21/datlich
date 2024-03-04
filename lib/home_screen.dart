@@ -7,6 +7,7 @@ import 'package:f_quizz/models/todo_model.dart';
 import 'package:f_quizz/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,14 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
     avatarBase64: '',
     role: '',
   );
-
-  // List catNames = [
-  //   "Dental",
-  //   "Heart",
-  //   "Eye",
-  //   "Brain",
-  //   "Ear"
-  // ];
 
   List<String> catNames = [];
 
@@ -91,21 +84,58 @@ class _HomeScreenState extends State<HomeScreen> {
     if (searchQuery.isEmpty) {
       loadTodos();
     } else {
-      // Nếu có thông tin tìm kiếm, lọc danh sách theo thông tin này
+      // Chuyển đổi chuỗi tìm kiếm và loại bỏ dấu
+      String searchTerm = removeDiacritics(searchQuery.toLowerCase());
+
+      // Lọc danh sách theo chuỗi tìm kiếm đã được chuyển đổi
       List<TodoModel> filteredTodos = todos.where((todo) {
-        return todo.title.toLowerCase().contains(searchQuery.toLowerCase()) ||
-            todo.content.toLowerCase().contains(searchQuery.toLowerCase());
+        String titleWithoutDiacritics = removeDiacritics(todo.title.toLowerCase());
+        String contentWithoutDiacritics = removeDiacritics(todo.content.toLowerCase());
+
+        return titleWithoutDiacritics.contains(searchTerm) ||
+            contentWithoutDiacritics.contains(searchTerm);
       }).toList();
 
       Future.delayed(const Duration(milliseconds: 300), () {
-      setState(() {
-        todos = filteredTodos;
-        isSearching = false;
+        setState(() {
+          todos = filteredTodos;
+          isSearching = false;
+        });
       });
-    });
+
       print('Updated todos: $todos');
     }
   }
+
+  // Hàm chuyển đổi chuỗi và loại bỏ dấu
+  String removeDiacritics(String input) {
+    return input.replaceAll(RegExp(r'[^\w\s]+'), '');
+  }
+  // void updateSearchResults() {
+  //   setState(() {
+  //     isSearching = true;
+  //   });
+
+  //   // Nếu thông tin tìm kiếm rỗng, hiển thị toàn bộ danh sách
+  //   if (searchQuery.isEmpty) {
+  //     loadTodos();
+  //   } else {
+  //     // Nếu có thông tin tìm kiếm, lọc danh sách theo thông tin này
+  //     List<TodoModel> filteredTodos = todos.where((todo) {
+  //       return todo.title.toLowerCase().contains(searchQuery.toLowerCase()) ||
+  //           todo.content.toLowerCase().contains(searchQuery.toLowerCase());
+  //     }).toList();
+
+  //     Future.delayed(const Duration(milliseconds: 300), () {
+  //     setState(() {
+  //       todos = filteredTodos;
+  //       isSearching = false;
+  //     });
+  //   });
+  //     print('Updated todos: $todos');
+  //   }
+  // }
+
 
   Future<void> searchByCategory(String category) async {
     setState(() {
@@ -290,12 +320,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               const SizedBox(height: 10,),
-                              Text(
-                                catNames[index],
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black.withOpacity(0.7),
+                              Container(
+                                width: 110,
+                                child: Text(
+                                  catNames[index],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black.withOpacity(0.7),
+                                  ),
                                 ),
                               ),
                             ],
@@ -317,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Container(
-                    height: 340,
+                    height: 400,
                     child: isSearching
                     ? const Center(
                         child: CircularProgressIndicator(),
@@ -331,7 +365,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Column(
                           children: [
                             Container(
-                              height: 300,
+                              height: 320,
                               width: 200,
                               margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                               decoration: BoxDecoration(

@@ -201,4 +201,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pressback => 'Press back again to exit';
+
+  @override
+  String get status => 'Status';
 }

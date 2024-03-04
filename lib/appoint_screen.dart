@@ -250,28 +250,28 @@ Future<void> loadAvailableTimes() async {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  translation(context).patients,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(height: 8,),
-                                const Text(
-                                  "1.8k",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Column(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Text(
+                            //       translation(context).patients,
+                            //       style: const TextStyle(
+                            //         fontSize: 20,
+                            //         fontWeight: FontWeight.bold,
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //     const SizedBox(height: 8,),
+                            //     const Text(
+                            //       "1.8k",
+                            //       style: TextStyle(
+                            //         fontSize: 18,
+                            //         fontWeight: FontWeight.w500,
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -307,28 +307,28 @@ Future<void> loadAvailableTimes() async {
                                 ),
                               ],
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  translation(context).rating,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(height: 8,),
-                                const Text(
-                                  "4.9",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Column(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Text(
+                            //       translation(context).rating,
+                            //       style: const TextStyle(
+                            //         fontSize: 20,
+                            //         fontWeight: FontWeight.bold,
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //     const SizedBox(height: 8,),
+                            //     const Text(
+                            //       "4.9",
+                            //       style: TextStyle(
+                            //         fontSize: 18,
+                            //         fontWeight: FontWeight.w500,
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                           ],
                         ),
                       )
