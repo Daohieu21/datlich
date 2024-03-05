@@ -123,8 +123,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              subtitle: Text(
-                                appoint[index].content,
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    appoint[index].content,
+                                    style: const TextStyle(
+                                      fontSize: 16),
+                                  ),
+                                ],
                               ),
                             ),
                             const Padding(

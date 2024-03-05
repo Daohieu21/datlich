@@ -7,8 +7,8 @@ import 'package:f_quizz/models/todo_model.dart';
 import 'package:f_quizz/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -70,76 +70,92 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         todos = fetchedTodos;
       });
+      print('todos: $fetchedTodos');
     } catch (error) {
       print('Error loading todos: $error');
     }
   }
-
-  void updateSearchResults() {
-    setState(() {
-      isSearching = true;
-    });
+  
+  Future<void> updateSearchResults() async {
+    print('Start updateSearchResults');
+    // setState(() {
+    //   isSearching = true;
+    // });
 
     // Nếu thông tin tìm kiếm rỗng, hiển thị toàn bộ danh sách
     if (searchQuery.isEmpty) {
-      loadTodos();
+      print('Search query is empty. Loading all todos.');
+      await loadTodos();
     } else {
-      // Chuyển đổi chuỗi tìm kiếm và loại bỏ dấu
-      String searchTerm = removeDiacritics(searchQuery.toLowerCase());
-
-      // Lọc danh sách theo chuỗi tìm kiếm đã được chuyển đổi
+      // Nếu có thông tin tìm kiếm, lọc danh sách theo thông tin này
       List<TodoModel> filteredTodos = todos.where((todo) {
-        String titleWithoutDiacritics = removeDiacritics(todo.title.toLowerCase());
-        String contentWithoutDiacritics = removeDiacritics(todo.content.toLowerCase());
-
-        return titleWithoutDiacritics.contains(searchTerm) ||
-            contentWithoutDiacritics.contains(searchTerm);
+        // In giá trị của các biến để kiểm tra
+        print('Todo title: ${todo.title}');
+        print('Search query: $searchQuery');
+        print('Text without diacritics: ${removeDiacritics(todo.title)}');
+        print('Search query without diacritics: ${removeDiacritics(searchQuery)}');
+        return containsSearchQuery(
+          removeDiacritics(todo.title),
+          removeDiacritics(searchQuery),
+        ) ||
+            containsSearchQuery(
+              removeDiacritics(todo.content),
+              removeDiacritics(searchQuery),
+            );
       }).toList();
 
-      Future.delayed(const Duration(milliseconds: 300), () {
-        setState(() {
-          todos = filteredTodos;
-          isSearching = false;
-        });
+      setState(() {
+        todos = filteredTodos;
+        //isSearching = false;
       });
-
+      print('Search results: $filteredTodos');
       print('Updated todos: $todos');
+      print('todos: $todos');
     }
+    print('End updateSearchResults');
   }
 
-  // Hàm chuyển đổi chuỗi và loại bỏ dấu
-  String removeDiacritics(String input) {
-    return input.replaceAll(RegExp(r'[^\w\s]+'), '');
+  bool containsSearchQuery(String text, String searchQuery) {
+    // Loại bỏ dấu ở cả text và searchQuery
+    String textWithoutDiacritics = removeDiacritics(text.toLowerCase());
+    String searchQueryWithoutDiacritics = removeDiacritics(searchQuery.toLowerCase());
+
+    // Kiểm tra xem textWithoutDiacritics có chứa searchQueryWithoutDiacritics hay không
+    return textWithoutDiacritics.contains(searchQueryWithoutDiacritics);
   }
-  // void updateSearchResults() {
-  //   setState(() {
-  //     isSearching = true;
-  //   });
 
-  //   // Nếu thông tin tìm kiếm rỗng, hiển thị toàn bộ danh sách
-  //   if (searchQuery.isEmpty) {
-  //     loadTodos();
-  //   } else {
-  //     // Nếu có thông tin tìm kiếm, lọc danh sách theo thông tin này
-  //     List<TodoModel> filteredTodos = todos.where((todo) {
-  //       return todo.title.toLowerCase().contains(searchQuery.toLowerCase()) ||
-  //           todo.content.toLowerCase().contains(searchQuery.toLowerCase());
-  //     }).toList();
+  String removeDiacritics(String text) {
+    // Bảng ánh xạ dấu tiếng Việt
+    final Map<String, String> diacriticMap = {
+      'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
+      'ă': 'a', 'ằ': 'a', 'ắ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
+      'â': 'a', 'ầ': 'a', 'ấ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
+      'è': 'e', 'é': 'e', 'ẻ': 'e', 'ẽ': 'e', 'ẹ': 'e',
+      'ê': 'e', 'ề': 'e', 'ế': 'e', 'ể': 'e', 'ễ': 'e', 'ệ': 'e',
+      'ì': 'i', 'í': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i',
+      'ò': 'o', 'ó': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o',
+      'ô': 'o', 'ồ': 'o', 'ố': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
+      'ơ': 'o', 'ờ': 'o', 'ớ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
+      'ù': 'u', 'ú': 'u', 'ủ': 'u', 'ũ': 'u', 'ụ': 'u',
+      'ư': 'u', 'ừ': 'u', 'ứ': 'u', 'ử': 'u', 'ữ': 'u', 'ự': 'u',
+      'ỳ': 'y', 'ý': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y',
+      'đ': 'd',
+    };
 
-  //     Future.delayed(const Duration(milliseconds: 300), () {
-  //     setState(() {
-  //       todos = filteredTodos;
-  //       isSearching = false;
-  //     });
-  //   });
-  //     print('Updated todos: $todos');
-  //   }
-  // }
+    // Áp dụng ánh xạ để loại bỏ dấu
+    String normalizedText = '';
+    for (var char in text.split('')) {
+      normalizedText += diacriticMap[char] ?? char;
+    }
+
+    return normalizedText;
+  }
+
 
 
   Future<void> searchByCategory(String category) async {
     setState(() {
-      isSearching = true;
+      //isSearching = true;
       // Thiết lập giá trị tìm kiếm bằng danh mục được chọn
       searchQuery = category;
     });
@@ -250,11 +266,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                           child: TextFormField(
+                          child: TextFormField(
                             onChanged: (value) {
                               setState(() {
                                 searchQuery = value;
                               });
+                              print('Search Query: $searchQuery');
                               // Gọi hàm cập nhật danh sách dựa trên thông tin tìm kiếm
                               updateSearchResults();
                             },
@@ -352,15 +369,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Container(
                     height: 400,
-                    child: isSearching
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    :ListView.builder(
+                    child: 
+                    // isSearching
+                    // ? const Center(
+                    //     child: CircularProgressIndicator(),
+                    //   )
+                    // :
+                    ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: todos.length,
                       itemBuilder: (context, index) {
+                        print('Building item $index');
                         TodoModel todo = todos[index];
                         return Column(
                           children: [

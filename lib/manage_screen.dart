@@ -112,15 +112,32 @@ class _ManageScreenState extends State<ManageScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: Column(
                           children: [
+                            const SizedBox(height: 8),
                             ListTile(
                               title: Text(
                                 appointList[index].title,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
+                                  fontSize: 16,
                                 ),
                               ),
-                              subtitle: Text(
-                                appointList[index].content,
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    appointList[index].content,
+                                    style: const TextStyle(
+                                      fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    "${translation(context).patients}: ${appointList[index].email}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             const Padding(

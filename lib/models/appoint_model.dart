@@ -5,6 +5,7 @@ class AppointModel{
   String todoid;
   String title;
   String content;
+  String email;
   DateTime time;
   bool isCompleted;
 
@@ -13,6 +14,7 @@ class AppointModel{
     required this.todoid, 
     required this.title, 
     required this.content,
+    required this.email,
     required this.time,
     this.isCompleted = false,
     });
@@ -22,6 +24,7 @@ class AppointModel{
     String? todoid,
     String? title,
     String? content,
+    String? email,
     DateTime? time,
     bool? isCompleted,
   }) {
@@ -30,6 +33,7 @@ class AppointModel{
       todoid: todoid ?? this.todoid,
       title: title ?? this.title,
       content: content ?? this.content,
+      email: email ?? this.email,
       time: time ?? this.time,
       isCompleted: isCompleted ?? this.isCompleted,
     );
@@ -42,6 +46,7 @@ class AppointModel{
       'todoid': todoid,
       'title': title,
       'content': content,
+      'email': email,
       'time': time.toIso8601String(),
       'isCompleted': isCompleted,
     };
@@ -57,6 +62,7 @@ class AppointModel{
       todoid: map['todoid'] as String, 
       title: map['title'] as String, 
       content: map['content'] as String,
+      email: map['email'] as String,
       time: DateTime.parse(map['time']),
       isCompleted: map['isCompleted'] as bool? ?? false,
     );

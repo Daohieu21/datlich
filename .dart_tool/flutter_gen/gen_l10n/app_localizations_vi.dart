@@ -200,7 +200,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get scheduledsuccess => 'Đặt lịch thành công';
 
   @override
-  String get pressback => 'Nhấn back lần nữa để thoát';
+  String get pressback => 'Nhấn lần nữa để thoát';
 
   @override
   String get status => 'Trạng thái';

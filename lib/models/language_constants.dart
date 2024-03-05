@@ -22,7 +22,7 @@ Future<Locale> setLocale(String languageCode) async {
 
 Future<Locale> getLocale() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String languageCode = prefs.getString(LAGUAGE_CODE) ?? ENGLISH;
+  String languageCode = prefs.getString(LAGUAGE_CODE) ?? VIETNAM;
   return _locale(languageCode);
 }
 
@@ -33,10 +33,10 @@ Future<void> saveLocale(Locale locale) async {
 
 Locale _locale(String languageCode) {
   switch (languageCode) {
-    case ENGLISH:
-      return const Locale(ENGLISH, '');
     case VIETNAM:
       return const Locale(VIETNAM, '');
+    case ENGLISH:
+      return const Locale(ENGLISH, '');
     default:
       return const Locale(VIETNAM, '');
   }

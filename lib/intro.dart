@@ -75,7 +75,7 @@ class _IntroState extends State<Intro> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
                   Text(
-                    'Skip',
+                    'Bỏ qua',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xFF3C3A36),
@@ -171,7 +171,7 @@ class _IntroState extends State<Intro> {
               bottom: 50,
             ),
             child: Button(
-              textButton: _currentIndex == contents.length - 1 ? "Let's Start" : "Next",
+              textButton: _currentIndex == contents.length - 1 ? "Bắt đầu" : "Tiếp",
               onTap: () {
                 if (_currentIndex == contents.length - 1) {
                   saveIntroStatus(); // Lưu trạng thái đã hiển thị trang intro

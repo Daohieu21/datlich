@@ -136,6 +136,7 @@ Future<void> addAppoint({
   required String todoid,
   required String title,
   required String content,
+  required String email,
   required String time,
 }) async {
   try {
@@ -146,6 +147,7 @@ Future<void> addAppoint({
       todoid: todoid,
       title: title,
       content: content,
+      email: email,
       time: parsedDateTime,
       isCompleted: false,
     );

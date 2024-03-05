@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_quizz/models/appoint_model.dart';
 import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
+import 'package:f_quizz/models/user_model.dart';
 import 'package:f_quizz/resources/colors.dart';
 import 'package:f_quizz/ui_components/btn/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +23,16 @@ class AppointScreen extends StatefulWidget {
 class _AppointScreenState extends State<AppointScreen> {
 
   late FirebaseService firebaseService; // Khai báo FirebaseService
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel(
+    uid: '',
+    email: '',
+    fullName: '',
+    createAt: DateTime.now(),
+    modifiedAt: DateTime.now(),
+    avatarBase64: '',
+    role: '',
+  );
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = const TimeOfDay(hour: 7, minute: 0);
   List<TimeOfDay> availableTimes = [
@@ -137,6 +149,19 @@ Future<void> loadAvailableTimes() async {
   }
 }
 
+  Future<void> loadUserDetails() async {
+      try {
+        final value = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user!.uid)
+            .get();
+        loggedInUser = UserModel.fromMap(value.data());
+        setState(() {});
+      } catch (error) {
+        print('Error loading user details: $error');
+      }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -145,6 +170,7 @@ Future<void> loadAvailableTimes() async {
     print('User: $user');
     firebaseService = FirebaseService(user?.uid ?? '');
     loadAvailableTimes();
+    loadUserDetails();
   }
   
   @override
@@ -446,6 +472,7 @@ Future<void> loadAvailableTimes() async {
                             // Lấy thông tin từ doctorInfo
                             String title = widget.doctorInfo.title;
                             String content = widget.doctorInfo.content;
+                            String email = loggedInUser.email;
                             // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
                             DateTime selectedDateTime = DateTime(
                               selectedDate.year, 
@@ -458,6 +485,7 @@ Future<void> loadAvailableTimes() async {
                               todoid: widget.doctorInfo.todoid ?? '',
                               title: title,
                               content: content,
+                              email: email,
                               time: selectedDateTime.toIso8601String(),
                             );
                             // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công

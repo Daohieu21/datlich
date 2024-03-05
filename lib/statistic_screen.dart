@@ -266,6 +266,34 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                       ),
                                       children: [
                                         TextSpan(
+                                          text: translation(context).patients,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const TextSpan(
+                                          text: ':',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const WidgetSpan(child: SizedBox(width: 5),),
+                                        TextSpan(
+                                          text: busyDoctors[index].email,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.normal,
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+                                        TextSpan(
                                           text: translation(context).schedule,
                                           style: const TextStyle(
                                             color: Colors.black,
