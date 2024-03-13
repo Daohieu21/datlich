@@ -58,7 +58,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         fullName: 'Default',
         createAt: DateTime.now(),
         modifiedAt: DateTime.now(),
-        avatarBase64: '', 
+        avatarBase64: '',
+        todoid: '', 
         role: 'admin',
       );
 

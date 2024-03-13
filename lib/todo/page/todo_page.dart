@@ -132,6 +132,7 @@ class _TodoPageState extends State<TodoPage> {
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
+                            width: 2,
                             color: Colors.grey,
                           ),
                           borderRadius: BorderRadius.circular(0),

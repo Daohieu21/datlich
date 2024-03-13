@@ -76,30 +76,30 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         emit(TodoState(todoList: state.todoList, selectedIndex: event.index));
       });
 
-    on<TodoEventToggleComplete>((event, emit) async {
-    try {
-      final updatedTodo = state.todoList[event.index].copyWith(
-        isCompleted: !state.todoList[event.index].isCompleted,
-      );
+    // on<TodoEventToggleComplete>((event, emit) async {
+    // try {
+    //   final updatedTodo = state.todoList[event.index].copyWith(
+    //     isCompleted: !state.todoList[event.index].isCompleted,
+    //   );
 
-      // Cập nhật trạng thái isCompleted vào Firebase
-      await firebaseService.updateTodo(
-        updatedTodo.todoid!,
-        title: updatedTodo.title,
-        content: updatedTodo.content,
-        experience: updatedTodo.experience,
-        // startTime: updatedTodo.startTime,
-        // endTime: updatedTodo.endTime,
-        isCompleted: updatedTodo.isCompleted,
-        imageBase64: updatedTodo.imageBase64,
-      );
+    //   // Cập nhật trạng thái isCompleted vào Firebase
+    //   await firebaseService.updateTodo(
+    //     updatedTodo.todoid!,
+    //     title: updatedTodo.title,
+    //     content: updatedTodo.content,
+    //     experience: updatedTodo.experience,
+    //     // startTime: updatedTodo.startTime,
+    //     // endTime: updatedTodo.endTime,
+    //     isCompleted: updatedTodo.isCompleted,
+    //     imageBase64: updatedTodo.imageBase64,
+    //   );
 
-      // Cập nhật danh sách Todos sau khi cập nhật
-      final todoList = await firebaseService.getTodos();
-      emit(TodoState(todoList: todoList));
-    } catch (error) {
-      // Xử lý lỗi nếu cần thiết
-    }
-    });
+    //   // Cập nhật danh sách Todos sau khi cập nhật
+    //   final todoList = await firebaseService.getTodos();
+    //   emit(TodoState(todoList: todoList));
+    // } catch (error) {
+    //   // Xử lý lỗi nếu cần thiết
+    // }
+    // });
   }
 }

@@ -4,6 +4,7 @@ class UserModel extends UserAccount {
   String? uid;
   String? fullName;
   String? avatarBase64;
+  String? todoid;
   final String role;
 
   UserModel({
@@ -13,6 +14,7 @@ class UserModel extends UserAccount {
     required DateTime modifiedAt,
     this.fullName,
     this.avatarBase64,
+    this.todoid,
     required this.role,
   }) : super(email: email, createAt: createAt, modifiedAt: modifiedAt);
 
@@ -28,6 +30,7 @@ class UserModel extends UserAccount {
           : DateTime.now(),
       fullName: map['fullName'],
       avatarBase64: map['avatarBase64'],
+      todoid: map['todoid'],
       role: map['role'],
     );
   }
@@ -41,6 +44,7 @@ class UserModel extends UserAccount {
       'modifiedAt': modifiedAt.toIso8601String(),
       'fullName': fullName,
       'avatarBase64': avatarBase64,
+      'todoid': todoid,
       'role': role,
     };
   }

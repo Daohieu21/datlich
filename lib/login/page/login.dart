@@ -50,7 +50,8 @@ class _LoginState extends State<Login> {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text(translation(context).notice),
-                content: Text(state.errorMessage),
+                //content: Text(state.errorMessage),
+                content: const Text('Tài khoản hoặc mật khâủ không đúng'),
                 actions: [
                   TextButton(
                     child: const Text("OK"),
@@ -93,47 +94,47 @@ class _LoginState extends State<Login> {
                                       fontWeight: FontWeight.w500),
                                 ),
                                 const SizedBox(
-                                  height: 8,
+                                  height: 18,
                                 ),
-                                Text(
-                                  translation(context).login_with_social_networks,
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.darkgray),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image(
-                                        image: Assets.images.icon1.provider(),
-                                        width: 40,
-                                        height: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 12,
-                                      ),
-                                      Image(
-                                        image: Assets.images.icon2.provider(),
-                                        width: 40,
-                                        height: 40,
-                                      ),
-                                      const SizedBox(
-                                        width: 12,
-                                      ),
-                                      Image(
-                                        image: Assets.images.icon3.provider(),
-                                        width: 40,
-                                        height: 40,
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                // Text(
+                                //   translation(context).login_with_social_networks,
+                                //   style: const TextStyle(
+                                //       fontSize: 14,
+                                //       fontWeight: FontWeight.w400,
+                                //       color: AppColors.darkgray),
+                                // ),
+                                // const SizedBox(
+                                //   height: 8,
+                                // ),
+                                // Container(
+                                //   width: double.infinity,
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.center,
+                                //     children: [
+                                //       Image(
+                                //         image: Assets.images.icon1.provider(),
+                                //         width: 40,
+                                //         height: 40,
+                                //       ),
+                                //       const SizedBox(
+                                //         width: 12,
+                                //       ),
+                                //       Image(
+                                //         image: Assets.images.icon2.provider(),
+                                //         width: 40,
+                                //         height: 40,
+                                //       ),
+                                //       const SizedBox(
+                                //         width: 12,
+                                //       ),
+                                //       Image(
+                                //         image: Assets.images.icon3.provider(),
+                                //         width: 40,
+                                //         height: 40,
+                                //       ),
+                                //     ],
+                                //   ),
+                                // )
                               ],
                             ),
                             const SizedBox(

@@ -206,7 +206,6 @@ Future<void> addAppoint({
             title: title,
             content: content,
             experience: experience,
-            isCompleted: false,
             imageBase64: imageBase64,
           );
 
@@ -244,7 +243,6 @@ Future<void> addAppoint({
       required String title,
       required String content,
       required String experience,
-      bool isCompleted = false,
     }) async {
       try {
         UserModel? userInfo = await getUserInfo();
@@ -254,7 +252,6 @@ Future<void> addAppoint({
             title: title,
             content: content,
             experience: experience,
-            isCompleted: isCompleted,
             imageBase64: imageBase64,
           );
 

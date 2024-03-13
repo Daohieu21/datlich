@@ -42,17 +42,23 @@ class _StatisticScreenState extends State<StatisticScreen> {
   void initState() {
     super.initState();
     firebaseService = FirebaseService(user?.uid ?? '');
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedInUser = UserModel.fromMap(value.data() ?? {});
-      setState(() {});
-    });
+    loadUserDetails();
     getAppoint();
   }
 
+  Future<void> loadUserDetails() async {
+    try {
+      final value = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get();
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    } catch (error) {
+      print('Error loading user details: $error');
+    }
+  }
+  
   Future<void> getTodos() async {
     try {
       List<TodoModel> fetchedTodo = await firebaseService.getTodos();
@@ -83,6 +89,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
             DateTime(appoint.time.year, appoint.time.month, appoint.time.day)
                 .isAtSameMomentAs(
                     DateTime(selectedDay.year, selectedDay.month, selectedDay.day)))
+        //.where((appoint) => appoint.todoid == loggedInUser.todoid) // điều kiện so sánh todoid
         .toList();
 
     return appointsForDay;
@@ -201,6 +208,62 @@ class _StatisticScreenState extends State<StatisticScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  // RichText(
+                                  //   text: TextSpan(
+                                  //     style: const TextStyle(
+                                  //       fontSize: 16,
+                                  //       fontStyle: FontStyle.normal,
+                                  //       color: Colors.black,
+                                  //     ),
+                                  //     children: [
+                                  //       const TextSpan(
+                                  //         text: 'ID 1',
+                                  //         style: TextStyle(
+                                  //           color: Colors.black,
+                                  //         ),
+                                  //       ),
+                                  //       const TextSpan(
+                                  //         text: ':',
+                                  //         style: TextStyle(
+                                  //           color: Colors.black,
+                                  //         ),
+                                  //       ),
+                                  //       const WidgetSpan(child: SizedBox(width: 5),),
+                                  //       TextSpan(
+                                  //         text: loggedInUser.todoid,
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(height: 8),
+                                  // RichText(
+                                  //   text: TextSpan(
+                                  //     style: const TextStyle(
+                                  //       fontSize: 16,
+                                  //       fontStyle: FontStyle.normal,
+                                  //       color: Colors.black,
+                                  //     ),
+                                  //     children: [
+                                  //       const TextSpan(
+                                  //         text: 'ID 2',
+                                  //         style: TextStyle(
+                                  //           color: Colors.black,
+                                  //         ),
+                                  //       ),
+                                  //       const TextSpan(
+                                  //         text: ':',
+                                  //         style: TextStyle(
+                                  //           color: Colors.black,
+                                  //         ),
+                                  //       ),
+                                  //       const WidgetSpan(child: SizedBox(width: 5),),
+                                  //       TextSpan(
+                                  //         text: busyDoctors[index].todoid,
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(height: 8),
                                   RichText(
                                     text: TextSpan(
                                       style: const TextStyle(

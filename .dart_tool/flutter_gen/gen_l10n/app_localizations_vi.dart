@@ -5,7 +5,7 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get login => 'Đăng ký';
+  String get login => 'Đăng nhập';
 
   @override
   String get login_with_social_networks => 'Đăng nhập bằng mạng xã hội';
@@ -14,7 +14,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get forgot_password => 'Quên mật khẩu ?';
 
   @override
-  String get sign_up => 'Đăng nhập';
+  String get sign_up => 'Đăng ký';
 
   @override
   String get create_your_account => 'Tạo tài khoản';

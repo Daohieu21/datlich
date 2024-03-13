@@ -102,13 +102,6 @@ Future<void> loadAvailableTimes() async {
     // Tạo danh sách chứa thời gian đã bận
     List<TimeOfDay> busyTimes = [];
 
-    // Chuyển đổi selectedDate thành DateTime để so sánh với adminAppointDateTime
-      // DateTime selectedDateTime = DateTime(
-      //   selectedDate.year,
-      //   selectedDate.month,
-      //   selectedDate.day,
-      // );
-
     // Lặp qua lịch làm việc của bác sĩ để thu thập các thời gian đã bận
     for (var adminAppoint in adminAppoints) {
       DateTime adminAppointDateTime = adminAppoint.time;

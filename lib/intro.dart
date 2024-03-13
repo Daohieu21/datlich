@@ -20,18 +20,18 @@ class _IntroState extends State<Intro> {
   List<IntroContent> contents = [
     IntroContent(
       image: Assets.images.intro1.path,
-      title: 'Learn About Your Doctors',
-      description: 'Discover your doctors: qualifications, expertise, and patient reviews, empowering you to make informed decisions about your healthcare journey.',
+      title: 'Tìm hiểu thông tin về bác sĩ',
+      description: 'Thông tin về trình độ chuyên môn giúp bạn đưa ra quyết định sáng suốt về hành trình chăm sóc sức khỏe của mình.',
     ),
     IntroContent(
       image: Assets.images.intro2.path,
-      title: 'Effortless Appointment Booking',
-      description: 'Revolutionize Your Medical Visits: Explore the Convenience of Booking Appointments Anytime, Anywhere',
+      title: 'Đặt lịch hẹn dễ dàng',
+      description: 'Cách mạng hóa các cuộc khám bệnh của bạn: Đặt lịch hẹn mọi lúc, mọi nơi.',
     ),
     IntroContent(
       image: Assets.images.intro3.path,
-      title: 'Friendly interface',
-      description: 'Experience a user-friendly interface that simplifies the process of booking appointments, ensuring a seamless and enjoyable healthcare management journey.',
+      title: 'Giao diện thân thiện',
+      description: 'Trải nghiệm giao diện thân thiện, giúp đơn giản hóa quá trình đặt lịch hẹn, đảm bảo hành trình quản lý chăm sóc sức khỏe liền mạch và thú vị.',
     ),
   ];
 

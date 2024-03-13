@@ -40,7 +40,8 @@ class _SignUpState extends State<SignUp> {
             builder: (context) {
               return AlertDialog(
                 title: Text(translation(context).notice),
-                content: Text(state.errorMessage),
+                //content: Text(state.errorMessage),
+                content: const Text('Tài khoản đã tồn tại'),
                 actions: [
                   TextButton(
                     child: Text(translation(context).ok),

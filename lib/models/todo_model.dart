@@ -6,7 +6,6 @@ class TodoModel{
   String title;
   String content;
   String experience;
-  bool isCompleted;
 
   TodoModel({
     this.todoid,
@@ -14,7 +13,6 @@ class TodoModel{
     required this.title, 
     required this.content,
     required this.experience,
-    this.isCompleted = false,
     });
 
     TodoModel copyWith({
@@ -23,7 +21,6 @@ class TodoModel{
     String? title,
     String? content,
     String? experience,
-    bool? isCompleted,
   }) {
     return TodoModel(
       todoid: todoid ?? this.todoid,
@@ -31,7 +28,6 @@ class TodoModel{
       title: title ?? this.title,
       content: content ?? this.content,
       experience: experience ?? this.experience,
-      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
@@ -43,7 +39,6 @@ class TodoModel{
       'title': title,
       'content': content,
       'experience': experience,
-      'isCompleted': isCompleted,
     };
   }
   
@@ -58,7 +53,6 @@ class TodoModel{
       title: map['title'] as String, 
       content: map['content'] as String,
       experience: map['experience'] as String,
-      isCompleted: map['isCompleted'],
     );
   }
   factory TodoModel.fromJson(String source) =>
