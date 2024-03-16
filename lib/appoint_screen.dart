@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_quizz/login/page/login.dart';
 import 'package:f_quizz/models/appoint_model.dart';
 import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/models/user_model.dart';
 import 'package:f_quizz/resources/colors.dart';
+import 'package:f_quizz/resources/validator.dart';
 import 'package:f_quizz/ui_components/btn/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,8 @@ class _AppointScreenState extends State<AppointScreen> {
     avatarBase64: '',
     role: '',
   );
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController reasonController= TextEditingController();
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = const TimeOfDay(hour: 7, minute: 0);
   List<TimeOfDay> availableTimes = [
@@ -455,45 +459,99 @@ Future<void> loadAvailableTimes() async {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 15,),
+                    Text(
+                    translation(context).reason,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                    ),
+                    Form(
+                      key: formKey,
+                      child: TextFormField(
+                        controller: reasonController,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        //validator: (value) => ValidatorUtils.todoValidate(context, value),
+                        decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black.withOpacity(0.6), // Màu sắc của đường gạch chân khi focus
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 30,),
                     Container(
                       margin: const EdgeInsets.only(bottom: 100),
                       child: Button(
                         textButton: translation(context).appoint,
                         onTap: () async {
-                          try {
-                            // Lấy thông tin từ doctorInfo
-                            String title = widget.doctorInfo.title;
-                            String content = widget.doctorInfo.content;
-                            String email = loggedInUser.email;
-                            // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
-                            DateTime selectedDateTime = DateTime(
-                              selectedDate.year, 
-                              selectedDate.month, 
-                              selectedDate.day,
-                              selectedTime.hour, 
-                              selectedTime.minute);
-                            // Gọi đến addAppoint để thêm dữ liệu lên Firebase
-                            await firebaseService.addAppoint(
-                              todoid: widget.doctorInfo.todoid ?? '',
-                              title: title,
-                              content: content,
-                              email: email,
-                              time: selectedDateTime.toIso8601String(),
+                          if (formKey.currentState!.validate() && user != null) {
+                            try {
+                              // Lấy thông tin từ doctorInfo
+                              String title = widget.doctorInfo.title;
+                              String content = widget.doctorInfo.content;
+                              String email = loggedInUser.email;
+                              String reason = reasonController.text;
+                              // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
+                              DateTime selectedDateTime = DateTime(
+                                selectedDate.year, 
+                                selectedDate.month, 
+                                selectedDate.day,
+                                selectedTime.hour, 
+                                selectedTime.minute);
+                              // Gọi đến addAppoint để thêm dữ liệu lên Firebase
+                              await firebaseService.addAppoint(
+                                todoid: widget.doctorInfo.todoid ?? '',
+                                title: title,
+                                content: content,
+                                email: email,
+                                reason: reason,
+                                time: selectedDateTime.toIso8601String(),
+                              );
+                              // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
+                              // Hiển thị Snackbar khi đặt lịch thành công
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(translation(context).scheduledsuccess),
+                                  duration: const Duration(seconds: 3), // Thời gian hiển thị Snackbar
+                                ),
+                              );
+                              print('Appointment added successfully!');
+                              loadAvailableTimes();
+                            } catch (error) {
+                              // Xử lý lỗi nếu có
+                              print('Error adding appointment: $error');
+                            }
+                          } else {
+                            // Hiển thị thông báo yêu cầu người dùng đăng nhập
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(translation(context).notice),
+                                  content: const Text("Bạn cần đăng nhập để sử dụng chức năng này."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("Hủy"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, Login.routeName);
+                                      },
+                                      child: const Text("OK"),
+                                    ),
+                                    
+                                  ],
+                                );
+                              },
                             );
-                            // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
-                            // Hiển thị Snackbar khi đặt lịch thành công
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(translation(context).scheduledsuccess),
-                                duration: const Duration(seconds: 3), // Thời gian hiển thị Snackbar
-                              ),
-                            );
-                            print('Appointment added successfully!');
-                            loadAvailableTimes();
-                          } catch (error) {
-                            // Xử lý lỗi nếu có
-                            print('Error adding appointment: $error');
                           }
                         },
                       ),

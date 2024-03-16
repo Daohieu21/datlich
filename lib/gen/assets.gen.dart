@@ -152,6 +152,9 @@ class $AssetsImagesGen {
   AssetGenImage get thunderstorms =>
       const AssetGenImage('assets/images/thunderstorms.png');
 
+  /// File path: assets/images/xcode.png
+  AssetGenImage get xcode => const AssetGenImage('assets/images/xcode.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         clearSky,
@@ -192,7 +195,8 @@ class $AssetsImagesGen {
         smokeOrVolcanicAsh,
         snow,
         snowShowers,
-        thunderstorms
+        thunderstorms,
+        xcode
       ];
 }
 

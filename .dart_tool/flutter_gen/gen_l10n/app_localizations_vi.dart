@@ -204,4 +204,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get status => 'Trạng thái';
+
+  @override
+  String get reason => 'Triệu chứng';
 }

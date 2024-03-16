@@ -7,6 +7,7 @@ class AppointModel{
   String content;
   String email;
   DateTime time;
+  String reason;
   bool isCompleted;
 
   AppointModel({
@@ -16,6 +17,7 @@ class AppointModel{
     required this.content,
     required this.email,
     required this.time,
+    required this.reason,
     this.isCompleted = false,
     });
 
@@ -25,6 +27,7 @@ class AppointModel{
     String? title,
     String? content,
     String? email,
+    String? reason,
     DateTime? time,
     bool? isCompleted,
   }) {
@@ -35,6 +38,7 @@ class AppointModel{
       content: content ?? this.content,
       email: email ?? this.email,
       time: time ?? this.time,
+      reason: reason ?? this.reason,
       isCompleted: isCompleted ?? this.isCompleted,
     );
   }
@@ -47,6 +51,7 @@ class AppointModel{
       'title': title,
       'content': content,
       'email': email,
+      'reason': reason,
       'time': time.toIso8601String(),
       'isCompleted': isCompleted,
     };
@@ -63,6 +68,7 @@ class AppointModel{
       title: map['title'] as String, 
       content: map['content'] as String,
       email: map['email'] as String,
+      reason: map['reason'] as String,
       time: DateTime.parse(map['time']),
       isCompleted: map['isCompleted'] as bool? ?? false,
     );

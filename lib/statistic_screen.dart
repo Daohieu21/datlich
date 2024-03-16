@@ -124,7 +124,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
         ),
       ),
       backgroundColor: Colors.white, // Màu nền của toàn bộ trang
-      body: Column(
+      body: user != null ? Column(
         children: [
           TableCalendar(
             firstDay: DateTime.utc(2010, 10, 16),
@@ -357,6 +357,34 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                       ),
                                       children: [
                                         TextSpan(
+                                          text: translation(context).reason,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const TextSpan(
+                                          text: ':',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const WidgetSpan(child: SizedBox(width: 5),),
+                                        TextSpan(
+                                          text: busyDoctors[index].reason,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.normal,
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+                                        TextSpan(
                                           text: translation(context).schedule,
                                           style: const TextStyle(
                                             color: Colors.black,
@@ -416,7 +444,12 @@ class _StatisticScreenState extends State<StatisticScreen> {
             ),
           ),
         ],
-      ),
+      ) : const Center(
+              child: Text(
+                "Bạn cần đăng nhập để sử dụng chức năng này",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
     );
   }
 }

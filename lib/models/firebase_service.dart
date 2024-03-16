@@ -138,6 +138,7 @@ Future<void> addAppoint({
   required String content,
   required String email,
   required String time,
+  required String reason,
 }) async {
   try {
     DateTime parsedDateTime = DateTime.parse(time);
@@ -148,6 +149,7 @@ Future<void> addAppoint({
       title: title,
       content: content,
       email: email,
+      reason: reason,
       time: parsedDateTime,
       isCompleted: false,
     );

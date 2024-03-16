@@ -34,16 +34,22 @@ class _ManageScreenState extends State<ManageScreen> {
     super.initState();
     firebaseService = FirebaseService(user?.uid ?? '');
     // Lấy thông tin người dùng
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedInUser = UserModel.fromMap(value.data() ?? {});
-      setState(() {});
-    });
+    loadUserDetails();
     // Gọi hàm getTodos để lấy danh sách TodoModel
     loadAppointAdmin();
+  }
+
+  Future<void> loadUserDetails() async {
+      try {
+        final value = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user!.uid)
+            .get();
+        loggedInUser = UserModel.fromMap(value.data());
+        setState(() {});
+      } catch (error) {
+        print('Error loading user details: $error');
+      }
   }
 
   Future<void> loadAppointAdmin() async {
@@ -80,7 +86,7 @@ class _ManageScreenState extends State<ManageScreen> {
           ),
         ),
       ),
-      body: Container(
+      body: user != null ? Container(
         margin: const EdgeInsets.only(bottom: 0),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -306,7 +312,12 @@ class _ManageScreenState extends State<ManageScreen> {
             ],
           ),
         ),
-      ),
+      ) : const Center(
+              child: Text(
+                "Bạn cần đăng nhập để sử dụng chức năng này",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
     );
   }
 }

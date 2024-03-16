@@ -37,14 +37,20 @@ class _SettingState extends State<Setting> {
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
+    loadUserDetails();
+  }
+
+  Future<void> loadUserDetails() async {
+      try {
+        final value = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user!.uid)
+            .get();
+        loggedInUser = UserModel.fromMap(value.data());
+        setState(() {});
+      } catch (error) {
+        print('Error loading user details: $error');
+      }
   }
 
   void changeAvatar(String avatarBase64, String uid, String value) async {
@@ -195,7 +201,7 @@ class _SettingState extends State<Setting> {
           ),
         ),
       ),
-      body: ListView(
+      body: user != null ? ListView(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,7 +318,12 @@ class _SettingState extends State<Setting> {
             ],
           ),
         ],
-      ),
+      ) : const Center(
+              child: Text(
+                "Bạn cần đăng nhập để sử dụng chức năng này",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
     );
   }
 }

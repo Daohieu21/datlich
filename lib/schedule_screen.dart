@@ -34,16 +34,22 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     super.initState();
     firebaseService = FirebaseService(user?.uid ?? '');
     // Lấy thông tin người dùng
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
+    loadUserDetails();
     // Gọi hàm getTodos để lấy danh sách TodoModel
     loadAppoint();
+  }
+
+  Future<void> loadUserDetails() async {
+      try {
+        final value = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user!.uid)
+            .get();
+        loggedInUser = UserModel.fromMap(value.data());
+        setState(() {});
+      } catch (error) {
+        print('Error loading user details: $error');
+      }
   }
 
   Future<void> loadAppoint() async {
@@ -68,7 +74,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -85,7 +90,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ),
         ),
       ),
-      body: Container(
+      body: user != null ? Container(
         margin: const EdgeInsets.only(bottom: 0),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -270,7 +275,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             ],
           ),
         ),
-      ),
+      ) : const Center(
+              child: Text(
+                "Bạn cần đăng nhập để sử dụng chức năng này",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
     );
   }
 }

@@ -26,7 +26,7 @@ class SplashScreenState extends State<SplashScreen> {
         Navigator.pushNamedAndRemoveUntil(context, MyBottomNavigationBar.routeName, (route) => false);
       } else {
         // Nếu người dùng chưa đăng nhập, chuyển hướng đến màn hình Intro
-        Navigator.pushNamedAndRemoveUntil(context, Intro.routeName, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, MyBottomNavigationBar.routeName, (route) => false);
       }
     });
   }

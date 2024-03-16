@@ -175,156 +175,218 @@ class _HomeScreenState extends State<HomeScreen> {
       translation(context).brain,
       translation(context).ear
     ];
-    return Material(
-      //color: const Color(0xFFD9E4EE),
-      color: Colors.white,
-      child: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 3.5,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.blue.withOpacity(0.8),
-                    Colors.blue,
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+    return Scaffold(
+      body: Material(
+        //color: const Color(0xFFD9E4EE),
+        color: Colors.white,
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3.5,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.blue.withOpacity(0.8),
+                      Colors.blue,
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            if (loggedInUser.avatarBase64 != null &&
-                                loggedInUser.avatarBase64!.isNotEmpty)
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundImage:
-                                    MemoryImage(base64Decode(loggedInUser.avatarBase64!)),
-                              )
-                            else
-                              const CircleAvatar(
-                                radius: 30,
-                                backgroundImage: AssetImage('assets/images/profile.png'),
-                              ),
-                            const Icon(
-                              Icons.notifications_outlined,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15,),
-                        Text(
-                          "${translation(context).hello}, ${loggedInUser.fullName}",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 10,),
-                        Text(
-                          translation(context).health,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 15, bottom: 20),
-                          width: MediaQuery.of(context).size.width,
-                          height: 50,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 6,
-                                spreadRadius: 3,
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (loggedInUser.avatarBase64 != null &&
+                                  loggedInUser.avatarBase64!.isNotEmpty)
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      MemoryImage(base64Decode(loggedInUser.avatarBase64!)),
+                                )
+                              else
+                                const CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: AssetImage('assets/images/profile.png'),
+                                ),
+                              const Icon(
+                                Icons.notifications_outlined,
+                                color: Colors.white,
+                                size: 30,
                               ),
                             ],
                           ),
-                          child: TextFormField(
-                            onChanged: (value) {
-                              setState(() {
-                                searchQuery = value;
-                              });
-                              print('Search Query: $searchQuery');
-                              // Gọi hàm cập nhật danh sách dựa trên thông tin tìm kiếm
-                              updateSearchResults();
-                            },
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: translation(context).enter,
-                              hintStyle: TextStyle(
-                                color: Colors.black.withOpacity(0.5),
-                              ),
-                              prefixIcon: const Icon(
-                                Icons.search,
-                                size: 30,
+                          const SizedBox(height: 15,),
+                          Text(
+                            "${translation(context).hello}, ${loggedInUser.fullName}",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 10,),
+                          Text(
+                            translation(context).health,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 15, bottom: 20),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 6,
+                                  spreadRadius: 3,
+                                ),
+                              ],
+                            ),
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  searchQuery = value;
+                                });
+                                print('Search Query: $searchQuery');
+                                // Gọi hàm cập nhật danh sách dựa trên thông tin tìm kiếm
+                                updateSearchResults();
+                              },
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: translation(context).enter,
+                                hintStyle: TextStyle(
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.search,
+                                  size: 30,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      translation(context).category,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black.withOpacity(0.7),
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 15,),
-                  Container(
-                    height: 100,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: catNames.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            // Bấm vào danh mục, gọi hàm tìm kiếm dựa trên danh mục này
-                            searchByCategory(catNames[index]);
-                          },
-                          child: Column(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        translation(context).category,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.7),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15,),
+                    Container(
+                      height: 100,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: catNames.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              // Bấm vào danh mục, gọi hàm tìm kiếm dựa trên danh mục này
+                              searchByCategory(catNames[index]);
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                                  height: 60,
+                                  width: 60,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFF2F8FF),
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 4,
+                                        spreadRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Center(
+                                    child: catIcons[index],
+                                  ),
+                                ),
+                                const SizedBox(height: 10,),
+                                Container(
+                                  width: 110,
+                                  child: Text(
+                                    catNames[index],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black.withOpacity(0.7),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 30,), 
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        translation(context).recommended,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.7),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 430,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: todos.length,
+                        itemBuilder: (context, index) {
+                          //print('Building item $index');
+                          TodoModel todo = todos[index];
+                          return Column(
                             children: [
                               Container(
-                                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                                height: 60,
-                                width: 60,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF2F8FF),
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
+                                height: 320,
+                                width: 200,
+                                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF2F8FF),
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Colors.grey,
                                       blurRadius: 4,
@@ -332,183 +394,124 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ],
                                 ),
-                                child: Center(
-                                  child: catIcons[index],
-                                ),
-                              ),
-                              const SizedBox(height: 10,),
-                              Container(
-                                width: 110,
-                                child: Text(
-                                  catNames[index],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black.withOpacity(0.7),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 30,), 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      translation(context).recommended,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 400,
-                    child: 
-                    // isSearching
-                    // ? const Center(
-                    //     child: CircularProgressIndicator(),
-                    //   )
-                    // :
-                    ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: todos.length,
-                      itemBuilder: (context, index) {
-                        print('Building item $index');
-                        TodoModel todo = todos[index];
-                        return Column(
-                          children: [
-                            Container(
-                              height: 320,
-                              width: 200,
-                              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF2F8FF),
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 4,
-                                    spreadRadius: 2,
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Stack(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => AppointScreen(doctorInfo: todo),
-                                            ),
-                                          );
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            topRight: Radius.circular(15),
-                                          ),
-                                          child: Image.memory(
-                                            base64Decode(todo.imageBase64),
-                                            height: 200,
-                                            width: 200,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.topRight,
-                                        child: Container(
-                                          margin: const EdgeInsets.all(8),
-                                          height: 45,
-                                          width: 45,
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xFFF2F8FF),
-                                            shape: BoxShape.circle,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 4,
-                                                spreadRadius: 2,
-                                              ),
-                                            ],
-                                          ),
-                                          child: const Center(
-                                            child: Icon(
-                                              Icons.favorite_outline,
-                                              color: Colors.blue,
-                                              size: 28,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8,),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Text(
-                                          todo.title,
-                                          style: const TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.blue,
-                                          ),
-                                        ),
-                                        Text(
-                                          todo.content,
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8,),
-                                        Row(
-                                          children: const [
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.amber,
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => AppointScreen(doctorInfo: todo),
+                                              ),
+                                            );
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              topRight: Radius.circular(15),
                                             ),
-                                            SizedBox(width: 5,),
-                                            Text(
-                                              "4.8",
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.black,
+                                            child: Image.memory(
+                                              base64Decode(todo.imageBase64),
+                                              height: 200,
+                                              width: 200,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: Container(
+                                            margin: const EdgeInsets.all(8),
+                                            height: 45,
+                                            width: 45,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFFF2F8FF),
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  blurRadius: 4,
+                                                  spreadRadius: 2,
+                                                ),
+                                              ],
+                                            ),
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.favorite_outline,
+                                                color: Colors.blue,
+                                                size: 28,
                                               ),
                                             ),
-                                          ],
+                                          ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(height: 8,),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            todo.title,
+                                            style: const TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                          Text(
+                                            todo.content,
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w300,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8,),
+                                          Row(
+                                            children: const [
+                                              Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              ),
+                                              SizedBox(width: 5,),
+                                              Text(
+                                                "4.8",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.chat),
       ),
     );
   }
