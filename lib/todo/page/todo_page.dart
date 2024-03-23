@@ -1,15 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_quizz/models/firebase_service.dart';
 import 'package:f_quizz/models/language_constants.dart';
 import 'package:f_quizz/models/todo_model.dart';
+import 'package:f_quizz/models/user_model.dart';
 import 'package:f_quizz/resources/colors.dart';
 import 'package:f_quizz/todo/bloc/todo_bloc.dart';
 import 'package:f_quizz/todo/bloc/todo_event.dart';
 import 'package:f_quizz/todo/bloc/todo_state.dart';
 import 'package:f_quizz/todo/widget/todo_bottomsheet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({Key? key}) : super(key: key);
@@ -23,11 +26,23 @@ class TodoPage extends StatefulWidget {
 class _TodoPageState extends State<TodoPage> {
   final ScrollController _scrollController = ScrollController();
   Map<String, List<TodoModel>> todoMap = {};
-  //int selectedIndex = -1;
+  late FirebaseService firebaseService;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel(
+    uid: '',
+    email: '',
+    fullName: '',
+    createAt: DateTime.now(),
+    modifiedAt: DateTime.now(),
+    avatarBase64: '', 
+    role: '',
+  );
 
   @override
   void initState() {
     super.initState();
+    firebaseService = FirebaseService(user?.uid ?? '');
+    loadUserDetails();
     context.read<TodoBloc>().add(TodoEventReadData());
   }
 
@@ -37,7 +52,20 @@ class _TodoPageState extends State<TodoPage> {
     super.dispose();
   }
 
-    void addTodo(TodoModel newTodo) {
+  Future<void> loadUserDetails() async {
+    try {
+      final value = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get();
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    } catch (error) {
+      print('Error loading user details: $error');
+    }
+  }
+
+  void addTodo(TodoModel newTodo) {
     context.read<TodoBloc>().add(TodoEventAdd(newTodo: newTodo));
   }
 
@@ -103,7 +131,7 @@ class _TodoPageState extends State<TodoPage> {
       builder: (context, state) {
         final List<TodoModel> todoList = state.todoList;
         return Scaffold(
-          body: ListView.builder(
+          body: user != null ? ListView.builder(
             controller: _scrollController,
             itemCount: todoList.length,
             itemBuilder: (context, index) {
@@ -266,7 +294,12 @@ class _TodoPageState extends State<TodoPage> {
                 ),
               );
             },
-          ),
+          ) : const Center(
+              child: Text(
+                "Bạn cần đăng nhập để sử dụng chức năng này",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
           floatingActionButton: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
             child: FloatingActionButton(

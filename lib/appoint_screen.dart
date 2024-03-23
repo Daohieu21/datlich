@@ -510,6 +510,7 @@ Future<void> loadAvailableTimes() async {
                                 content: content,
                                 email: email,
                                 reason: reason,
+                                 isCompleted: 'false',
                                 time: selectedDateTime.toIso8601String(),
                               );
                               // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công

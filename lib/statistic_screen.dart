@@ -426,7 +426,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                         ),
                                         const WidgetSpan(child: SizedBox(width: 5),),
                                         TextSpan(
-                                          text: busyDoctors[index].isCompleted ? translation(context).success : translation(context).porocessing,
+                                          text: busyDoctors[index].isCompleted == "true" ? translation(context).success : translation(context).porocessing,
                                         ),
                                       ],
                                     ),

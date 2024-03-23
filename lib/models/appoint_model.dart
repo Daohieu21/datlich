@@ -8,7 +8,7 @@ class AppointModel{
   String email;
   DateTime time;
   String reason;
-  bool isCompleted;
+  String isCompleted;
 
   AppointModel({
     this.aid,
@@ -18,7 +18,7 @@ class AppointModel{
     required this.email,
     required this.time,
     required this.reason,
-    this.isCompleted = false,
+    required this.isCompleted,
     });
 
     AppointModel copyWith({
@@ -29,7 +29,7 @@ class AppointModel{
     String? email,
     String? reason,
     DateTime? time,
-    bool? isCompleted,
+    String? isCompleted,
   }) {
     return AppointModel(
       aid: aid ?? this.aid,
@@ -70,7 +70,7 @@ class AppointModel{
       email: map['email'] as String,
       reason: map['reason'] as String,
       time: DateTime.parse(map['time']),
-      isCompleted: map['isCompleted'] as bool? ?? false,
+      isCompleted: map['isCompleted'] as String,
     );
   }
   factory AppointModel.fromJson(String source) =>

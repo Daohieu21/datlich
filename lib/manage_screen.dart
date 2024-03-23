@@ -198,7 +198,7 @@ class _ManageScreenState extends State<ManageScreen> {
                                     ),
                                     const SizedBox(width: 5),
                                     Text(
-                                      appointList[index].isCompleted ? translation(context).success : translation(context).porocessing,
+                                      appointList[index].isCompleted == "true" ? translation(context).success : translation(context).porocessing,
                                       style: const TextStyle(
                                         color: Colors.black54,
                                       ),
@@ -272,7 +272,7 @@ class _ManageScreenState extends State<ManageScreen> {
                                   onTap: () async {
                                     try {
                                       // Gọi hàm để cập nhật lịch hẹn khi nhấn completed
-                                      await firebaseService.updateAppoint(appointList[index].aid!, isCompleted: true);
+                                      await firebaseService.updateAppoint(appointList[index].aid!, isCompleted: "true");
                                       // Sau khi câppj nhật thành công, cập nhật danh sách lịch hẹn
                                       loadAppointAdmin();
                                     } catch (error) {

@@ -139,6 +139,7 @@ Future<void> addAppoint({
   required String email,
   required String time,
   required String reason,
+  required String isCompleted,
 }) async {
   try {
     DateTime parsedDateTime = DateTime.parse(time);
@@ -151,7 +152,7 @@ Future<void> addAppoint({
       email: email,
       reason: reason,
       time: parsedDateTime,
-      isCompleted: false,
+      isCompleted: "false",
     );
     
 
@@ -281,7 +282,7 @@ Future<void> addAppoint({
     String? title,
     String? content,
     DateTime? time,
-    bool isCompleted = false,
+    String isCompleted = "false",
   }) async {
     try {
       UserModel? userInfo = await getUserInfo();
@@ -336,6 +337,7 @@ Future<void> addAppoint({
     }
   }
 
+
   Future<void> deleteTodo(String todoid) async {
     try {
       UserModel? userInfo = await getUserInfo();
@@ -387,5 +389,4 @@ Future<void> addAppoint({
       throw error;
     }
   }
-
 }

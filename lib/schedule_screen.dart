@@ -192,7 +192,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     ),
                                     const SizedBox(width: 5),
                                     Text(
-                                      appoint[index].isCompleted ? translation(context).success : translation(context).porocessing,
+                                      appoint[index].isCompleted == "true" ? translation(context).success : translation(context).porocessing,
                                       style: const TextStyle(
                                         color: Colors.black54,
                                       ),
