@@ -1,18 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:f_quizz/models/firebase_service.dart';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/models/todo_model.dart';
-import 'package:f_quizz/models/user_model.dart';
-import 'package:f_quizz/resources/colors.dart';
-import 'package:f_quizz/todo/bloc/todo_bloc.dart';
-import 'package:f_quizz/todo/bloc/todo_event.dart';
-import 'package:f_quizz/todo/bloc/todo_state.dart';
-import 'package:f_quizz/todo/widget/todo_bottomsheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../models/firebase_service.dart';
+import '../../models/language_constants.dart';
+import '../../models/todo_model.dart';
+import '../../models/user_model.dart';
+import '../../resources/colors.dart';
+import '../bloc/todo_bloc.dart';
+import '../bloc/todo_event.dart';
+import '../bloc/todo_state.dart';
+import '../widget/todo_bottomsheet.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({Key? key}) : super(key: key);

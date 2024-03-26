@@ -1,18 +1,18 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:f_quizz/login/page/login.dart';
-import 'package:f_quizz/models/appoint_model.dart';
-import 'package:f_quizz/models/firebase_service.dart';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/models/user_model.dart';
-import 'package:f_quizz/resources/colors.dart';
-import 'package:f_quizz/resources/validator.dart';
-import 'package:f_quizz/ui_components/btn/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'login/page/login.dart';
+import 'models/appoint_model.dart';
+import 'models/firebase_service.dart';
+import 'models/language_constants.dart';
 import 'models/todo_model.dart';
 import 'package:intl/intl.dart';
+import 'models/user_model.dart';
+import 'resources/colors.dart';
+import 'resources/validator.dart';
+import 'ui_components/btn/button.dart';
 
 class AppointScreen extends StatefulWidget {
   final TodoModel doctorInfo;
@@ -473,7 +473,7 @@ Future<void> loadAvailableTimes() async {
                       child: TextFormField(
                         controller: reasonController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        //validator: (value) => ValidatorUtils.todoValidate(context, value),
+                        validator: (value) => ValidatorUtils.todoValidate(context, value),
                         decoration: InputDecoration(
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -488,10 +488,78 @@ Future<void> loadAvailableTimes() async {
                       margin: const EdgeInsets.only(bottom: 100),
                       child: Button(
                         textButton: translation(context).appoint,
+                        // onTap: () async {
+                        //   if (formKey.currentState!.validate() && user != null) {
+                        //     try {
+                        //       // Lấy thông tin từ doctorInfo
+                        //       String title = widget.doctorInfo.title;
+                        //       String content = widget.doctorInfo.content;
+                        //       String email = loggedInUser.email;
+                        //       String reason = reasonController.text;
+                        //       // Sử dụng đối tượng DateTime để giữ cả ngày và thời gian
+                        //       DateTime selectedDateTime = DateTime(
+                        //         selectedDate.year, 
+                        //         selectedDate.month, 
+                        //         selectedDate.day,
+                        //         selectedTime.hour, 
+                        //         selectedTime.minute);
+                        //       // Gọi đến addAppoint để thêm dữ liệu lên Firebase
+                        //       await firebaseService.addAppoint(
+                        //         todoid: widget.doctorInfo.todoid ?? '',
+                        //         title: title,
+                        //         content: content,
+                        //         email: email,
+                        //         reason: reason,
+                        //          isCompleted: 'false',
+                        //         time: selectedDateTime.toIso8601String(),
+                        //       );
+                        //       // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
+                        //       // Hiển thị Snackbar khi đặt lịch thành công
+                        //       ScaffoldMessenger.of(context).showSnackBar(
+                        //         SnackBar(
+                        //           content: Text(translation(context).scheduledsuccess),
+                        //           duration: const Duration(seconds: 3), // Thời gian hiển thị Snackbar
+                        //         ),
+                        //       );
+                        //       print('Appointment added successfully!');
+                        //       loadAvailableTimes();
+                        //     } catch (error) {
+                        //       // Xử lý lỗi nếu có
+                        //       print('Error adding appointment: $error');
+                        //     }
+                        //   } else {
+                        //     // Hiển thị thông báo yêu cầu người dùng đăng nhập
+                        //     showDialog(
+                        //       context: context,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           title: Text(translation(context).notice),
+                        //           content: const Text("Bạn cần đăng nhập để sử dụng chức năng này."),
+                        //           actions: <Widget>[
+                        //             TextButton(
+                        //               onPressed: () {
+                        //                 Navigator.pop(context);
+                        //               },
+                        //               child: const Text("Hủy"),
+                        //             ),
+                        //             TextButton(
+                        //               onPressed: () {
+                        //                 Navigator.pushNamed(context, Login.routeName);
+                        //               },
+                        //               child: const Text("OK"),
+                        //             ),
+                                    
+                        //           ],
+                        //         );
+                        //       },
+                        //     );
+                        //   }
+                        // },
                         onTap: () async {
-                          if (formKey.currentState!.validate() && user != null) {
-                            try {
-                              // Lấy thông tin từ doctorInfo
+                          if (user != null) { // Kiểm tra người dùng đã đăng nhập
+                            if (formKey.currentState!.validate()) { // Kiểm tra tính hợp lệ của dữ liệu
+                              try {
+                                // Lấy thông tin từ doctorInfo
                               String title = widget.doctorInfo.title;
                               String content = widget.doctorInfo.content;
                               String email = loggedInUser.email;
@@ -513,7 +581,6 @@ Future<void> loadAvailableTimes() async {
                                  isCompleted: 'false',
                                 time: selectedDateTime.toIso8601String(),
                               );
-                              // Thông báo thành công hoặc thực hiện các hành động khác sau khi thêm thành công
                               // Hiển thị Snackbar khi đặt lịch thành công
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -523,12 +590,12 @@ Future<void> loadAvailableTimes() async {
                               );
                               print('Appointment added successfully!');
                               loadAvailableTimes();
-                            } catch (error) {
-                              // Xử lý lỗi nếu có
-                              print('Error adding appointment: $error');
+                              } catch (error) {
+                                print('Error adding appointment: $error');
+                              }
                             }
                           } else {
-                            // Hiển thị thông báo yêu cầu người dùng đăng nhập
+                            // Hiển thị thông báo yêu cầu đăng nhập
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -548,13 +615,12 @@ Future<void> loadAvailableTimes() async {
                                       },
                                       child: const Text("OK"),
                                     ),
-                                    
                                   ],
                                 );
                               },
                             );
                           }
-                        },
+                        }
                       ),
                     ),
                   ],

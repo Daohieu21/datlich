@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/resources/validator.dart';
-import 'package:f_quizz/ui_components/btn/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'models/language_constants.dart';
+import 'resources/validator.dart';
+import 'ui_components/btn/button.dart';
 
 void showChangePasswordDialog(BuildContext context) {
     showDialog(

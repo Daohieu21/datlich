@@ -1,8 +1,10 @@
+import 'package:Appointment/models/todo_model.dart';
+import 'package:Appointment/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-import 'package:f_quizz/models/appoint_model.dart';
-import 'package:f_quizz/models/todo_model.dart';
-import 'package:f_quizz/models/user_model.dart';
+
+import 'appoint_model.dart';
+
 
 class FirebaseService {
   final String uid;

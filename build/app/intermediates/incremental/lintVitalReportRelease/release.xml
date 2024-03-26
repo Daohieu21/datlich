@@ -4,10 +4,10 @@
     minSdkVersion="21"
     targetSdkVersion="33"
     shrinking="true"
-    mergedManifest="C:\code\datlich\build\app\intermediates\merged_manifest\release\AndroidManifest.xml"
-    manifestMergeReport="C:\code\datlich\build\app\outputs\logs\manifest-merger-release-report.txt"
-    proguardFiles="C:\code\datlich\build\app\intermediates\default_proguard_files\global\proguard-android.txt-7.4.1;C:\flutter\packages\flutter_tools\gradle\flutter_proguard_rules.pro;proguard-rules.pro"
-    partialResultsDir="C:\code\datlich\build\app\intermediates\lint_vital_partial_results\release\out">
+    mergedManifest="C:\code\datlich_admin\build\app\intermediates\merged_manifest\release\AndroidManifest.xml"
+    manifestMergeReport="C:\code\datlich_admin\build\app\outputs\logs\manifest-merger-release-report.txt"
+    proguardFiles="C:\code\datlich_admin\build\app\intermediates\default_proguard_files\global\proguard-android.txt-7.4.1;C:\flutter\packages\flutter_tools\gradle\flutter_proguard_rules.pro;proguard-rules.pro"
+    partialResultsDir="C:\code\datlich_admin\build\app\intermediates\lint_vital_partial_results\release\out">
   <buildFeatures
       namespacing="REQUIRED"/>
   <sourceProviders>
@@ -32,9 +32,9 @@
         value="android.app.Application" />
   </manifestPlaceholders>
   <mainArtifact
-      classOutputs="C:\code\datlich\build\app\intermediates\javac\release\classes;C:\code\datlich\build\app\tmp\kotlin-classes\release;C:\code\datlich\build\app\kotlinToolingMetadata;C:\code\datlich\build\app\intermediates\compile_and_runtime_not_namespaced_r_class_jar\release\R.jar"
+      classOutputs="C:\code\datlich_admin\build\app\intermediates\javac\release\classes;C:\code\datlich_admin\build\app\tmp\kotlin-classes\release;C:\code\datlich_admin\build\app\kotlinToolingMetadata;C:\code\datlich_admin\build\app\intermediates\compile_and_runtime_not_namespaced_r_class_jar\release\R.jar"
       applicationId="com.r2s.hieu"
-      generatedSourceFolders="C:\code\datlich\build\app\generated\ap_generated_sources\release\out;C:\code\datlich\build\app\generated\aidl_source_output_dir\release\out;C:\code\datlich\build\app\generated\source\buildConfig\release;C:\code\datlich\build\app\generated\renderscript_source_output_dir\release\out"
-      generatedResourceFolders="C:\code\datlich\build\app\generated\res\rs\release;C:\code\datlich\build\app\generated\res\resValues\release">
+      generatedSourceFolders="C:\code\datlich_admin\build\app\generated\ap_generated_sources\release\out;C:\code\datlich_admin\build\app\generated\aidl_source_output_dir\release\out;C:\code\datlich_admin\build\app\generated\source\buildConfig\release;C:\code\datlich_admin\build\app\generated\renderscript_source_output_dir\release\out"
+      generatedResourceFolders="C:\code\datlich_admin\build\app\generated\res\rs\release;C:\code\datlich_admin\build\app\generated\res\resValues\release">
   </mainArtifact>
 </variant>

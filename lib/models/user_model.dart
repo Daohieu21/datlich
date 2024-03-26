@@ -1,4 +1,4 @@
-import 'package:f_quizz/models/user_account.dart';
+import 'user_account.dart';
 
 class UserModel extends UserAccount {
   String? uid;

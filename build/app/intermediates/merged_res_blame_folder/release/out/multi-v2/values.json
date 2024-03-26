@@ -57,24 +57,7 @@
                     }
                 },
                 {
-                    "source": "C:\\code\\datlich\\build\\app\\generated\\res\\processReleaseGoogleServices\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,195,277,381,490,610,704",
-                        "endColumns": "139,81,103,108,119,93,70",
-                        "endOffsets": "190,272,376,485,605,699,770"
-                    },
-                    "to": {
-                        "startLines": "144,145,146,147,148,149,150",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "10162,10302,10384,10488,10597,10717,10811",
-                        "endColumns": "139,81,103,108,119,93,70",
-                        "endOffsets": "10297,10379,10483,10592,10712,10806,10877"
-                    }
-                },
-                {
-                    "source": "C:\\code\\datlich\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\code\\datlich_admin\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -109,6 +92,23 @@
                         "endLines": "7,8,9,10,88,177,181,330,342,350",
                         "endColumns": "11,59,51,44,59,24,24,24,24,24",
                         "endOffsets": "339,399,451,496,5631,12390,12521,17300,17740,18049"
+                    }
+                },
+                {
+                    "source": "C:\\code\\datlich_admin\\build\\app\\generated\\res\\processReleaseGoogleServices\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,195,277,381,490,610,704",
+                        "endColumns": "139,81,103,108,119,93,70",
+                        "endOffsets": "190,272,376,485,605,699,770"
+                    },
+                    "to": {
+                        "startLines": "144,145,146,147,148,149,150",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "10162,10302,10384,10488,10597,10717,10811",
+                        "endColumns": "139,81,103,108,119,93,70",
+                        "endOffsets": "10297,10379,10483,10592,10712,10806,10877"
                     }
                 },
                 {

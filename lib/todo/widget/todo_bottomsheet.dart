@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/models/todo_model.dart';
-import 'package:f_quizz/resources/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../models/language_constants.dart';
+import '../../models/todo_model.dart';
+import '../../resources/validator.dart';
 import '../../ui_components/btn/button.dart';
 import 'package:flutter/services.dart';
 
@@ -20,6 +20,7 @@ class TodoBottomSheet extends StatefulWidget {
   final void Function(TodoModel todo) onAdd;
   final TodoModel? currentTodo;
   final int? index;
+  
 
   @override
   State<TodoBottomSheet> createState() => _TodoBottomSheetState();
@@ -30,6 +31,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
   XFile? pickedImage;
   // Thêm biến để lưu trữ thông tin Todo mới hoặc chỉnh sửa
   TodoModel? newTodo;
+  
 
   @override
   void initState() {
@@ -67,6 +69,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
   final TextEditingController experienceController = TextEditingController();
   String selectedCategory = ''; // Thêm biến để lưu trữ danh mục được chọn
   List<String> catNames = [];
+  bool imageSelected = false;
 
   int choose = -1;
   @override
@@ -114,7 +117,10 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                                 height: 150,
                                 fit: BoxFit.cover,
                               )
-                            : Image.asset(
+                            : 
+                            // const Icon(Icons.photo_camera_outlined,
+                            //   size: 150),
+                            Image.asset(
                                 'assets/images/profile.png',
                                 width: 150,
                                 height: 150,
@@ -170,6 +176,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                     const SizedBox(height: 40),
                     Button(
                       textButton: translation(context).save,
+                      //onTap: onSaveButtonPressed,
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           if (widget.currentTodo != null) {
@@ -243,4 +250,54 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
       });
     }
   }
+
+  void onSaveButtonPressed() {
+      if (formKey.currentState!.validate()) {
+        if (!imageSelected) { // Kiểm tra xem người dùng đã chọn ảnh hay chưa
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(translation(context).notice),
+                content: const Text('Ảnh không được để trống'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+          return;
+        }
+        // Kiểm tra và xử lý dữ liệu Todo
+        if (widget.currentTodo != null) {
+          // Xử lý khi chỉnh sửa Todo
+          final TodoModel editedTodo = TodoModel(
+            todoid: widget.currentTodo?.todoid ?? '',
+            title: titleController.text,
+            content: selectedCategory,
+            experience: experienceController.text,
+            // Thêm logic cập nhật ảnh khi pickedImage không null
+            imageBase64: pickedImage != null
+                ? base64Encode(File(pickedImage!.path).readAsBytesSync())
+                : widget.currentTodo?.imageBase64 ?? '',
+          );
+          widget.onEdit.call(widget.index!, editedTodo);
+        } else {
+          // Xử lý khi thêm mới Todo
+          final TodoModel newTodo = TodoModel(
+            title: titleController.text,
+            content: selectedCategory,
+            experience: experienceController.text,
+            imageBase64: pickedImage != null
+                ? base64Encode(File(pickedImage!.path).readAsBytesSync()) : '');
+          widget.onAdd.call(newTodo);
+        }
+        Navigator.pop(context);
+      }
+    }
 }

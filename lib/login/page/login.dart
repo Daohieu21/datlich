@@ -1,15 +1,15 @@
-import 'package:f_quizz/login/bloc/login_bloc.dart';
-import 'package:f_quizz/login/bloc/login_event.dart';
-import 'package:f_quizz/login/bloc/login_state.dart';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/navigation.dart';
-import 'package:f_quizz/gen/assets.gen.dart';
-import 'package:f_quizz/resources/validator.dart';
-import 'package:f_quizz/signup/page/sign_up.dart';
+import 'package:Appointment/gen/assets.gen.dart';
+import 'package:Appointment/login/bloc/login_bloc.dart';
+import 'package:Appointment/login/bloc/login_event.dart';
+import 'package:Appointment/login/bloc/login_state.dart';
+import 'package:Appointment/models/language_constants.dart';
+import 'package:Appointment/navigation.dart';
+import 'package:Appointment/resources/colors.dart';
+import 'package:Appointment/resources/validator.dart';
+import 'package:Appointment/signup/page/sign_up.dart';
+import 'package:Appointment/ui_components/btn/button.dart';
 import 'package:flutter/material.dart';
-import 'package:f_quizz/resources/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:f_quizz/ui_components/btn/button.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key, this.email}) : super(key: key);

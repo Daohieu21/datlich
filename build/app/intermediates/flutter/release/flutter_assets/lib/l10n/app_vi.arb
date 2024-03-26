@@ -1,8 +1,8 @@
 {
-    "login": "Đăng ký",
+    "login": "Đăng nhập",
     "login_with_social_networks": "Đăng nhập bằng mạng xã hội",
     "forgot_password": "Quên mật khẩu ?",
-    "sign_up": "Đăng nhập",
+    "sign_up": "Đăng ký",
     "create_your_account": "Tạo tài khoản",
     "log_out": "Đăng xuất",
     "setting": "Cài đặt",
@@ -64,6 +64,7 @@
     "appoint": "Đặt lịch",
     "statistic": "Thống kê",
     "scheduledsuccess": "Đặt lịch thành công",
-    "pressback": "Nhấn back lần nữa để thoát",
-    "status": "Trạng thái"
+    "pressback": "Nhấn lần nữa để thoát",
+    "status": "Trạng thái",
+    "reason": "Triệu chứng"
 }

@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:f_quizz/gen/assets.gen.dart';
-import 'package:f_quizz/intro.dart';
-import 'package:f_quizz/navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'gen/assets.gen.dart';
+import 'navigation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

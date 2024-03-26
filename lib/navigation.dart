@@ -1,16 +1,17 @@
-import 'package:f_quizz/home_screen.dart';
-import 'package:f_quizz/manage_screen.dart';
-import 'package:f_quizz/models/firebase_service.dart';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/resources/colors.dart';
-import 'package:f_quizz/schedule_screen.dart';
-import 'package:f_quizz/setting/page/setting.dart';
-import 'package:f_quizz/statistic_screen.dart';
-import 'package:f_quizz/todo/bloc/todo_bloc.dart';
-import 'package:f_quizz/todo/page/todo_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'home_screen.dart';
+import 'manage_screen.dart';
+import 'models/firebase_service.dart';
+import 'models/language_constants.dart';
+import 'resources/colors.dart';
+import 'schedule_screen.dart';
+import 'setting/page/setting.dart';
+import 'statistic_screen.dart';
+import 'todo/bloc/todo_bloc.dart';
+import 'todo/page/todo_page.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({Key? key}) : super(key: key);

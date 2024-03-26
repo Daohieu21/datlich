@@ -2,11 +2,11 @@ io.flutter.plugins.sharedpreferences.shared_preferences_android-jetified-annotat
 io.flutter.plugins.sharedpreferences.shared_preferences_android-jetified-window-java-1.0.0-beta04-1 C:\Users\ADMIN\.gradle\caches\transforms-3\4ccb83218baa0c80377365f57fdc3ecd\transformed\jetified-window-java-1.0.0-beta04\res
 io.flutter.plugins.sharedpreferences.shared_preferences_android-core-1.6.0-2 C:\Users\ADMIN\.gradle\caches\transforms-3\6c721b44d00dbc4b3f2ad6bb927961c5\transformed\core-1.6.0\res
 io.flutter.plugins.sharedpreferences.shared_preferences_android-jetified-window-1.0.0-beta04-3 C:\Users\ADMIN\.gradle\caches\transforms-3\f2d404fd6cd6e1d2a1eae3223d6cc2a2\transformed\jetified-window-1.0.0-beta04\res
-io.flutter.plugins.sharedpreferences.shared_preferences_android-pngs-4 C:\code\datlich\build\shared_preferences_android\generated\res\pngs\release
-io.flutter.plugins.sharedpreferences.shared_preferences_android-resValues-5 C:\code\datlich\build\shared_preferences_android\generated\res\resValues\release
-io.flutter.plugins.sharedpreferences.shared_preferences_android-rs-6 C:\code\datlich\build\shared_preferences_android\generated\res\rs\release
-io.flutter.plugins.sharedpreferences.shared_preferences_android-mergeReleaseResources-7 C:\code\datlich\build\shared_preferences_android\intermediates\incremental\release\mergeReleaseResources\merged.dir
-io.flutter.plugins.sharedpreferences.shared_preferences_android-mergeReleaseResources-8 C:\code\datlich\build\shared_preferences_android\intermediates\incremental\release\mergeReleaseResources\stripped.dir
-io.flutter.plugins.sharedpreferences.shared_preferences_android-merged_res-9 C:\code\datlich\build\shared_preferences_android\intermediates\merged_res\release
+io.flutter.plugins.sharedpreferences.shared_preferences_android-pngs-4 C:\code\datlich_admin\build\shared_preferences_android\generated\res\pngs\release
+io.flutter.plugins.sharedpreferences.shared_preferences_android-resValues-5 C:\code\datlich_admin\build\shared_preferences_android\generated\res\resValues\release
+io.flutter.plugins.sharedpreferences.shared_preferences_android-rs-6 C:\code\datlich_admin\build\shared_preferences_android\generated\res\rs\release
+io.flutter.plugins.sharedpreferences.shared_preferences_android-mergeReleaseResources-7 C:\code\datlich_admin\build\shared_preferences_android\intermediates\incremental\release\mergeReleaseResources\merged.dir
+io.flutter.plugins.sharedpreferences.shared_preferences_android-mergeReleaseResources-8 C:\code\datlich_admin\build\shared_preferences_android\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+io.flutter.plugins.sharedpreferences.shared_preferences_android-merged_res-9 C:\code\datlich_admin\build\shared_preferences_android\intermediates\merged_res\release
 io.flutter.plugins.sharedpreferences.shared_preferences_android-main-10 C:\flutter\.pub-cache\hosted\pub.dartlang.org\shared_preferences_android-2.2.0\android\src\main\res
 io.flutter.plugins.sharedpreferences.shared_preferences_android-release-11 C:\flutter\.pub-cache\hosted\pub.dartlang.org\shared_preferences_android-2.2.0\android\src\release\res

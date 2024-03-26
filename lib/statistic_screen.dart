@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:f_quizz/models/appoint_model.dart';
-import 'package:f_quizz/models/firebase_service.dart';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/models/user_model.dart';
-import 'package:f_quizz/resources/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'models/appoint_model.dart';
+import 'models/firebase_service.dart';
+import 'models/language_constants.dart';
 import 'models/todo_model.dart';
+import 'models/user_model.dart';
+import 'resources/colors.dart';
 
 class StatisticScreen extends StatefulWidget {
   const StatisticScreen({Key? key}) : super(key: key);

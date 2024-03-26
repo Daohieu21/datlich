@@ -1,15 +1,14 @@
-import 'package:f_quizz/change_info.dart';
-import 'package:f_quizz/login/bloc/login_bloc.dart';
-import 'package:f_quizz/navigation.dart';
-import 'package:f_quizz/setting/page/setting.dart';
-import 'package:f_quizz/signup/bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:f_quizz/login/page/login.dart';
-import 'package:f_quizz/signup/page/sign_up.dart';
-import 'package:f_quizz/splash_screen.dart';
-import 'package:f_quizz/intro.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'change_info.dart';
+import 'intro.dart';
+import 'login/bloc/login_bloc.dart';
+import 'login/page/login.dart';
+import 'navigation.dart';
+import 'setting/page/setting.dart';
+import 'signup/bloc/sign_up_bloc.dart';
+import 'signup/page/sign_up.dart';
+import 'splash_screen.dart';
 import 'todo/page/todo_page.dart';
 
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (settings) {

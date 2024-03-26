@@ -1,13 +1,13 @@
-import 'package:f_quizz/intro.dart';
-import 'package:f_quizz/login/bloc/login_bloc.dart';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/routs.dart';
-import 'package:f_quizz/signup/bloc/sign_up_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:f_quizz/splash_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'login/bloc/login_bloc.dart';
+import 'models/language_constants.dart';
+import 'routs.dart';
+import 'signup/bloc/sign_up_bloc.dart';
+import 'splash_screen.dart';
 
 
 

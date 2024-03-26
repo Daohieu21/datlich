@@ -1,9 +1,10 @@
-import 'package:f_quizz/models/user_account.dart';
-import 'package:f_quizz/signup/bloc/sign_up_event.dart';
-import 'package:f_quizz/signup/bloc/sign_up_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../models/user_account.dart';
+import 'sign_up_event.dart';
+import 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final TextEditingController emailController = TextEditingController();

@@ -65,5 +65,6 @@
     "statistic": "Statistic",
     "scheduledsuccess": "Scheduled successfully",
     "pressback": "Press back again to exit",
-    "status": "Status"
+    "status": "Status",
+    "reason": "Reason"
 }

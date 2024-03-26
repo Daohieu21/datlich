@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:f_quizz/ui_components/btn/buttonPrimary.dart';
 
+import 'buttonPrimary.dart';
 
 class WarningDialog extends StatelessWidget {
   const WarningDialog(

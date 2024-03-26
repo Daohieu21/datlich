@@ -1,5 +1,4 @@
-
-import 'package:f_quizz/models/user_account.dart';
+import '../../models/user_account.dart';
 
 class SignUpInitialState extends SignUpState {}
 

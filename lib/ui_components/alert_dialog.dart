@@ -1,7 +1,5 @@
-import 'package:f_quizz/login/page/login.dart';
-import 'package:f_quizz/resources/constants.dart';
 import 'package:flutter/material.dart';
-
+import '../login/page/login.dart';
 import '../signup/page/sign_up.dart';
 
 void showAccountExistDialog1(BuildContext context) {

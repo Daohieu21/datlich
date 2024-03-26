@@ -1,13 +1,13 @@
 <libraries>
   <library
-      name="__local_aars__:C:\code\datlich\build\app\intermediates\flutter\release\libs.jar:unspecified@jar"
-      jars="C:\code\datlich\build\app\intermediates\flutter\release\libs.jar"
-      resolved="__local_aars__:C:\code\datlich\build\app\intermediates\flutter\release\libs.jar:unspecified"/>
+      name="__local_aars__:C:\code\datlich_admin\build\app\intermediates\flutter\release\libs.jar:unspecified@jar"
+      jars="C:\code\datlich_admin\build\app\intermediates\flutter\release\libs.jar"
+      resolved="__local_aars__:C:\code\datlich_admin\build\app\intermediates\flutter\release\libs.jar:unspecified"/>
   <library
-      name="C:\code\datlich\android@@:shared_preferences_android::release"
-      jars="C:\code\datlich\build\shared_preferences_android\.transforms\60c942cef873fb688d45ccb57a1ee313\transformed\out\jars\classes.jar;C:\code\datlich\build\shared_preferences_android\.transforms\60c942cef873fb688d45ccb57a1ee313\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:shared_preferences_android::release"
+      jars="C:\code\datlich_admin\build\shared_preferences_android\.transforms\54ff07a11f5b641d56ed216f20d330bc\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\shared_preferences_android\.transforms\54ff07a11f5b641d56ed216f20d330bc\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.sharedpreferences:shared_preferences_android:unspecified"
-      folder="C:\code\datlich\build\shared_preferences_android\.transforms\60c942cef873fb688d45ccb57a1ee313\transformed\out"
+      folder="C:\code\datlich_admin\build\shared_preferences_android\.transforms\54ff07a11f5b641d56ed216f20d330bc\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -17,10 +17,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\code\datlich\android@@:firebase_auth::release"
-      jars="C:\code\datlich\build\firebase_auth\.transforms\f6c2509a6b0538fbf2a397f603ee970b\transformed\out\jars\classes.jar;C:\code\datlich\build\firebase_auth\.transforms\f6c2509a6b0538fbf2a397f603ee970b\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:firebase_auth::release"
+      jars="C:\code\datlich_admin\build\firebase_auth\.transforms\066bc3a11915eac6b7c71e91026b42b6\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\firebase_auth\.transforms\066bc3a11915eac6b7c71e91026b42b6\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.firebase.auth:firebase_auth:unspecified"
-      folder="C:\code\datlich\build\firebase_auth\.transforms\f6c2509a6b0538fbf2a397f603ee970b\transformed\out"
+      folder="C:\code\datlich_admin\build\firebase_auth\.transforms\066bc3a11915eac6b7c71e91026b42b6\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -30,10 +30,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\code\datlich\android@@:firebase_database::release"
-      jars="C:\code\datlich\build\firebase_database\.transforms\db66d5a29133769bf7bfc46014780e7a\transformed\out\jars\classes.jar;C:\code\datlich\build\firebase_database\.transforms\db66d5a29133769bf7bfc46014780e7a\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:firebase_database::release"
+      jars="C:\code\datlich_admin\build\firebase_database\.transforms\8a93b97eb6a712619fbc63e99c4a07b2\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\firebase_database\.transforms\8a93b97eb6a712619fbc63e99c4a07b2\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.firebase.database:firebase_database:unspecified"
-      folder="C:\code\datlich\build\firebase_database\.transforms\db66d5a29133769bf7bfc46014780e7a\transformed\out"
+      folder="C:\code\datlich_admin\build\firebase_database\.transforms\8a93b97eb6a712619fbc63e99c4a07b2\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -43,10 +43,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\code\datlich\android@@:cloud_firestore::release"
-      jars="C:\code\datlich\build\cloud_firestore\.transforms\b8035968d68574d8f6e2219a424c5339\transformed\out\jars\classes.jar;C:\code\datlich\build\cloud_firestore\.transforms\b8035968d68574d8f6e2219a424c5339\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:cloud_firestore::release"
+      jars="C:\code\datlich_admin\build\cloud_firestore\.transforms\95947a4adb5d7a8a7a2329c39fa13cec\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\cloud_firestore\.transforms\95947a4adb5d7a8a7a2329c39fa13cec\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.firebase.cloudfirestore:cloud_firestore:unspecified"
-      folder="C:\code\datlich\build\cloud_firestore\.transforms\b8035968d68574d8f6e2219a424c5339\transformed\out"
+      folder="C:\code\datlich_admin\build\cloud_firestore\.transforms\95947a4adb5d7a8a7a2329c39fa13cec\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -56,10 +56,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\code\datlich\android@@:firebase_core::release"
-      jars="C:\code\datlich\build\firebase_core\.transforms\eef96c6cddf175d5bfed0b4e331b9e52\transformed\out\jars\classes.jar;C:\code\datlich\build\firebase_core\.transforms\eef96c6cddf175d5bfed0b4e331b9e52\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:firebase_core::release"
+      jars="C:\code\datlich_admin\build\firebase_core\.transforms\c5da6e135031209c5eba72173eb44938\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\firebase_core\.transforms\c5da6e135031209c5eba72173eb44938\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.firebase.core:firebase_core:unspecified"
-      folder="C:\code\datlich\build\firebase_core\.transforms\eef96c6cddf175d5bfed0b4e331b9e52\transformed\out"
+      folder="C:\code\datlich_admin\build\firebase_core\.transforms\c5da6e135031209c5eba72173eb44938\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -69,10 +69,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\code\datlich\android@@:flutter_plugin_android_lifecycle::release"
-      jars="C:\code\datlich\build\flutter_plugin_android_lifecycle\.transforms\521660beef2bdb96f1e2e7a20777d084\transformed\out\jars\classes.jar;C:\code\datlich\build\flutter_plugin_android_lifecycle\.transforms\521660beef2bdb96f1e2e7a20777d084\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:flutter_plugin_android_lifecycle::release"
+      jars="C:\code\datlich_admin\build\flutter_plugin_android_lifecycle\.transforms\94b2f6748da1e806ee8aa93fbfed03f6\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\flutter_plugin_android_lifecycle\.transforms\94b2f6748da1e806ee8aa93fbfed03f6\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.flutter_plugin_android_lifecycle:flutter_plugin_android_lifecycle:unspecified"
-      folder="C:\code\datlich\build\flutter_plugin_android_lifecycle\.transforms\521660beef2bdb96f1e2e7a20777d084\transformed\out"
+      folder="C:\code\datlich_admin\build\flutter_plugin_android_lifecycle\.transforms\94b2f6748da1e806ee8aa93fbfed03f6\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -82,10 +82,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\code\datlich\android@@:fluttertoast::release"
-      jars="C:\code\datlich\build\fluttertoast\.transforms\b0678eb01a07d85df6f315a55f556858\transformed\out\jars\classes.jar;C:\code\datlich\build\fluttertoast\.transforms\b0678eb01a07d85df6f315a55f556858\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:fluttertoast::release"
+      jars="C:\code\datlich_admin\build\fluttertoast\.transforms\639fc699a6f35d7959fdddc3ecd9faed\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\fluttertoast\.transforms\639fc699a6f35d7959fdddc3ecd9faed\transformed\out\jars\libs\R.jar"
       resolved="com.example.FlutterToast:fluttertoast:unspecified"
-      folder="C:\code\datlich\build\fluttertoast\.transforms\b0678eb01a07d85df6f315a55f556858\transformed\out"
+      folder="C:\code\datlich_admin\build\fluttertoast\.transforms\639fc699a6f35d7959fdddc3ecd9faed\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -95,10 +95,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\code\datlich\android@@:image_picker_android::release"
-      jars="C:\code\datlich\build\image_picker_android\.transforms\fdca2742553cdf7a6b2903c8ab5499e3\transformed\out\jars\classes.jar;C:\code\datlich\build\image_picker_android\.transforms\fdca2742553cdf7a6b2903c8ab5499e3\transformed\out\jars\libs\R.jar"
+      name="C:\code\datlich_admin\android@@:image_picker_android::release"
+      jars="C:\code\datlich_admin\build\image_picker_android\.transforms\97550cfc82279521904707b94320d176\transformed\out\jars\classes.jar;C:\code\datlich_admin\build\image_picker_android\.transforms\97550cfc82279521904707b94320d176\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.imagepicker:image_picker_android:unspecified"
-      folder="C:\code\datlich\build\image_picker_android\.transforms\fdca2742553cdf7a6b2903c8ab5499e3\transformed\out"
+      folder="C:\code\datlich_admin\build\image_picker_android\.transforms\97550cfc82279521904707b94320d176\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

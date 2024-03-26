@@ -1,14 +1,15 @@
-import 'package:f_quizz/gen/assets.gen.dart';
-import 'package:f_quizz/models/language_constants.dart';
-import 'package:f_quizz/resources/colors.dart';
-import 'package:f_quizz/resources/validator.dart';
-import 'package:f_quizz/signup/bloc/sign_up_bloc.dart';
-import 'package:f_quizz/signup/bloc/sign_up_event.dart';
-import 'package:f_quizz/signup/bloc/sign_up_state.dart';
 import 'package:flutter/material.dart';
-import 'package:f_quizz/login/page/login.dart';
-import 'package:f_quizz/ui_components/btn/button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../gen/assets.gen.dart';
+import '../../login/page/login.dart';
+import '../../models/language_constants.dart';
+import '../../resources/colors.dart';
+import '../../resources/validator.dart';
+import '../../ui_components/btn/button.dart';
+import '../bloc/sign_up_bloc.dart';
+import '../bloc/sign_up_event.dart';
+import '../bloc/sign_up_state.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key, this.email}) : super(key: key);

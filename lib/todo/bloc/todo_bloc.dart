@@ -1,7 +1,7 @@
-import 'package:f_quizz/models/firebase_service.dart';
-import 'package:f_quizz/todo/bloc/todo_event.dart';
-import 'package:f_quizz/todo/bloc/todo_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../models/firebase_service.dart';
+import 'todo_event.dart';
+import 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final FirebaseService firebaseService;

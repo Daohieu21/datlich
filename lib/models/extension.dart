@@ -1,4 +1,4 @@
-import 'package:f_quizz/gen/assets.gen.dart';
+import 'package:Appointment/gen/assets.gen.dart';
 
 extension CurrentWeatherExt on int? {
 

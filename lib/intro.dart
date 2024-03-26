@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:f_quizz/login/page/login.dart';
-import 'package:f_quizz/ui_components/btn/button.dart';
-import 'package:f_quizz/gen/assets.gen.dart';
+
+import 'gen/assets.gen.dart';
+import 'login/page/login.dart';
+import 'ui_components/btn/button.dart';
+
 
 class Intro extends StatefulWidget {
   const Intro({Key? key}) : super(key: key);

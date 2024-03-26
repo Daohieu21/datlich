@@ -1,6 +1,7 @@
-import 'package:f_quizz/ui_components/btn/buttonPrimary.dart';
-import 'package:f_quizz/ui_components/btn/buttonSecondary.dart';
 import 'package:flutter/material.dart';
+
+import 'buttonPrimary.dart';
+import 'buttonSecondary.dart';
 
 class WarningDialog2 extends StatelessWidget {
   const WarningDialog2(

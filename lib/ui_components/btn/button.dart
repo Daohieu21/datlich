@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:f_quizz/resources/colors.dart';
 
 class Button extends StatelessWidget {
   const Button({

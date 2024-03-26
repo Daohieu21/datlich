@@ -1,5 +1,5 @@
-import 'package:f_quizz/models/language_constants.dart';
 import 'package:flutter/material.dart';
+import '../models/language_constants.dart';
 
 class ValidatorUtils {
   static String? usernameValidator(BuildContext context, String? username) {

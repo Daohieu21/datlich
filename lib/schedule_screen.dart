@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:f_quizz/models/appoint_model.dart';
-import 'package:f_quizz/models/firebase_service.dart';
-import 'package:f_quizz/models/language_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'models/appoint_model.dart';
+import 'models/firebase_service.dart';
+import 'models/language_constants.dart';
 import 'models/user_model.dart';
 
 class ScheduleScreen extends StatefulWidget {

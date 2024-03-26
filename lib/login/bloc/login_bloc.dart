@@ -1,6 +1,6 @@
+import 'package:Appointment/login/bloc/login_state.dart';
+import 'package:Appointment/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:f_quizz/login/bloc/login_state.dart';
-import 'package:f_quizz/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

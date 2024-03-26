@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.r2s.hieu">
    <application
-        android:label="f_quizz"
+        android:label="Appointment"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

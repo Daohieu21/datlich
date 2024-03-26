@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:f_quizz/ui_components/btn/warningDialog.dart';
-
 
 class ButtonPrimary extends StatelessWidget {
   const ButtonPrimary({super.key, required this.textButton});
